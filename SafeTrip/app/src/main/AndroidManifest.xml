@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.crimekiller.safetrip">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    <activity android:name=".ui.EditPasswordActivity" >
+    </activity>
+
+    <activity android:name=".ui.ManageUsernameActivity" >
+    </activity>
+
+    <activity android:name=".ui.MyProfileActivity" >
+    </activity>
+
+    <activity android:name=".ui.UserPageActivity" >
+    </activity>
+
+    <activity android:name=".ui.SignUpActivity" >
+    </activity>
+    <activity
+        android:name=".ui.AdminActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+
+    <activity
+        android:name=".ui.ManageFriendActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+    <activity
+        android:name=".ui.PendingRequestActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+    <activity
+        android:name=".ui.AdminUserPagerActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+    <activity
+        android:name=".ui.ManagePostActivity"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+    <activity
+        android:name=".ui.ViewAllPostActivity"
+        android:label="@string/title_activity_view_all_post"
+        android:theme="@style/AppTheme.NoActionBar" />
+
+    <activity
+        android:name=".ui.ViewSelfPostActivity"
+        android:label="@string/title_activity_view_self_post"
+        android:theme="@style/AppTheme.NoActionBar" />
+    <activity
+        android:name=".ui.NewPostActivity"
+        android:label="@string/title_activity_new_post"
+        android:theme="@style/AppTheme.NoActionBar" />
+    <activity
+        android:name=".ui.ViewDetailedSelfPostActivity"
+        android:label="@string/title_activity_view_detailed_self_post"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+</manifest>

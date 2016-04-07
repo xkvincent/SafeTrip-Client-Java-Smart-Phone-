@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/myProfile_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:layout_marginTop="90dp"
+        android:text="My Profile"
+        android:textColor="#2C3646"
+        android:gravity="center"
+        android:textStyle="bold"
+
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:id="@+id/myProfile_imageView"
+            android:src="@drawable/social1" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username: Java18641"
+                android:textSize="15dp"
+                android:id="@+id/myProfile_textView6"
+                android:layout_margin="5dp" />
+
+
+            <custom_font.MyTextView
+                android:id="@+id/myProfile_upload"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Upload/Edit Piture"
+                android:textStyle="bold"
+                android:background="@drawable/round"
+                android:textColor="#CBD1DC"
+                android:gravity="center"
+                android:padding="3dp"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/myProfile_manage"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Username"
+        android:textStyle="bold"
+        android:background="@drawable/round"
+        android:textColor="#CBD1DC"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="14dp"
+        android:layout_marginTop="80dp"/>
+
+    <Button
+        android:id="@+id/myProfile_edit"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Password"
+        android:textStyle="bold"
+        android:background="@drawable/round"
+        android:textColor="#CBD1DC"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="14dp"
+        android:layout_marginTop="30dp"/>
+
+
+</LinearLayout>

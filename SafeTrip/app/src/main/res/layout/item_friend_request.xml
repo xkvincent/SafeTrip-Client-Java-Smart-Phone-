@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/PendingFriendNameTextView"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/RoundConnerTextView"
+        android:textColor="@color/colorBlack"/>
+    <Button
+        android:id="@+id/AcceptBtn"
+        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:text="Y"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:background="@drawable/round"
+        android:textColor="#CBD1DC"/>
+
+    <Button
+        android:id="@+id/IgnoreBtn"
+        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:text="N"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:background="@drawable/round"
+        android:textColor="#CBD1DC" />
+
+</LinearLayout>
