@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Wenlu on 4/2/16.
+ * Test on Github
  */
 public class User {
     private String name;
