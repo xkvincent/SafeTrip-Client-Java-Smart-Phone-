@@ -15,4 +15,23 @@
     <string name="View_Pending_Requests">View Pending Requests</string>
     <string name="YBtn">Y</string>
     <string name="NBtn">N</string>
+
+    <string name="SafeTrip">SafeTrip</string>
+    <string name="Signin">Sign in</string>
+    <string name="Login">Login</string>
+    <string name="Signup">Signup</string>
+    <string name="EditPassword">Edit Password</string>
+    <string name="Finish">Finish</string>
+    <string name="ManageUsername">Manage Username</string>
+    <string name="OldUsername">Old Username: Java18641</string>
+    <string name="MyProfile">My Profile</string>
+    <string name="username">Username: Java18641</string>
+    <string name="Picture">Upload/Edit Piture</string>
+    <string name="newaccount">Create new account</string>
+    <string name="information">By Signing up you agree with our terms and conditions</string>
+    <string name="User">User</string>
+    <string name="ManagePost">Manage Post</string>
+    <string name="ManageFriends">Manage Friends</string>
+    <string name="Admin">Admin</string>
+
 </resources>
