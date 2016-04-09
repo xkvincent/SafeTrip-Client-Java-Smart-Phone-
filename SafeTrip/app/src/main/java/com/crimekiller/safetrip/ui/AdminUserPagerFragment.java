@@ -41,7 +41,7 @@ public class AdminUserPagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_user, container, false);
+        View v = inflater.inflate(R.layout.ui_admin_user_pager_fragment, container, false);
         usernameTextView = (TextView) v.findViewById(R.id.usernameTextView);
 
         usernameTextView.setText( user.getName() );

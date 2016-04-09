@@ -20,7 +20,7 @@ public class PendingRequestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_request);
+        setContentView(R.layout.ui_pending_requesta_activity);
 
         PendingRequest = new ArrayList<String>();
         PendingRequest.add("aaa");

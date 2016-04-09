@@ -24,7 +24,7 @@ public class ManageFriendActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_friends);
+        setContentView(R.layout.ui_manage_friend_activity);
         friendsList = new ArrayList<String>();
 
         friendsList.add("aa");

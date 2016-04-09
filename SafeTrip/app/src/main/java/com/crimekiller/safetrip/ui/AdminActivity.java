@@ -25,7 +25,7 @@ public class AdminActivity extends ListActivity {
     @Override
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.ui_admin_activity);
 
         userList = new ArrayList<User>();
         userList = User.getUser();
