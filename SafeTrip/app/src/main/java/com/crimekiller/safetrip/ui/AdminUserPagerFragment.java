@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.crimekiller.safetrip.model.User;
+import com.crimekiller.safetrip.Model.User;
 import com.crimekiller.safetrip.R;
 
 /**

@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.crimekiller.safetrip.model.Post;
-import com.crimekiller.safetrip .model.SimplePostAdapter;
+import com.crimekiller.safetrip.Model.Post;
+import com.crimekiller.safetrip .Model.SimplePostAdapter;
 import com.crimekiller.safetrip.R;
 
 import java.util.ArrayList;
