@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Created by Wenlu on 4/2/16.
- * Test on Github
  */
 public class User {
     private String name;
@@ -12,6 +11,7 @@ public class User {
     public User(String name){
         this.name = name;
     }
+    private String ID;
 
     public static ArrayList<User> getUser(){
         users = new ArrayList<User>();
