@@ -16,7 +16,7 @@ public class MainActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.ui_main_activity);
 
         loginButton = (Button)findViewById(R.id.logIn_login);
         signupButton = (Button)findViewById(R.id.logIn_signUp);
@@ -46,11 +46,11 @@ public class MainActivity extends Activity{
 //    @Override
 //    public void onClick(View v) {
 //        switch (v.getId()) {
-//            case R.id.login:    //to 2
+//            case R.id.ui_main_activity:    //to 2
 //                Intent intent = new Intent(MainActivity.this, UserPage_Activity.class);
 //                startActivity(intent);
 //                break;
-//            case R.id.signup:   //to 3
+//            case R.id.ui_signup_activity:   //to 3
 //                Intent intent2 = new Intent(MainActivity.this, SignUp_Activity.class);
 //                startActivity(intent2);
 //                break;

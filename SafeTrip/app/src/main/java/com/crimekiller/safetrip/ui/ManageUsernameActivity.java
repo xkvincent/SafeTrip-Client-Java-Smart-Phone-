@@ -19,7 +19,7 @@ public class ManageUsernameActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mange_username);
+        setContentView(R.layout.ui_mange_username_activity);
 
         finishBt = (Button)findViewById(R.id.manageUsername_finish);
 //        finishBt.setOnClickListener(this);

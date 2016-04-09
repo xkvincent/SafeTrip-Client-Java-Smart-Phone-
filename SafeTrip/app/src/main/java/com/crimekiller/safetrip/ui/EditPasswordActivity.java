@@ -19,7 +19,7 @@ public class EditPasswordActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_password);
+        setContentView(R.layout.ui_edit_password_activity);
 
         finishBt = (Button)findViewById(R.id.editPassword_finish2);
 //        finishBt.setOnClickListener(this);

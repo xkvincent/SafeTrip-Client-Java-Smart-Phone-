@@ -22,7 +22,7 @@ public class UserPageActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.userpage);
+        setContentView(R.layout.ui_userpage_activity);
 
         profileBT = (Button)findViewById(R.id.userPage_myProfile);
         postBT = (Button)findViewById(R.id.userPage_post);

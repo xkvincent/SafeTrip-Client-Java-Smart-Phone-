@@ -20,7 +20,7 @@ public class MyProfileActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myprofile);
+        setContentView(R.layout.ui_myprofile_activity);
 
         manageUsernameBt = (Button)findViewById(R.id.myProfile_manage);
         editPasswordBt = (Button)findViewById(R.id.myProfile_edit);
