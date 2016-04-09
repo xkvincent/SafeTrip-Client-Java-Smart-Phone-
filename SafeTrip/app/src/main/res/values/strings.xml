@@ -6,4 +6,13 @@
     <string name="title_activity_view_self_post">ViewSelfPostActivity</string>
     <string name="title_activity_new_post">NewPostActivity</string>
     <string name="title_activity_view_detailed_self_post">ViewDetailedSelfPostActivity</string>
+    <string name="Administrate_Users">Administrate Users</string>
+    <string name="Manage_Friends">Manage Friends</string>
+    <string name="Pending_Friends_Requests">Pending Friends Requests</string>
+    <string name="Basic_Information">Basic Information</string>
+    <string name="Username">Username</string>
+    <string name="ok">ok</string>
+    <string name="View_Pending_Requests">View Pending Requests</string>
+    <string name="YBtn">Y</string>
+    <string name="NBtn">N</string>
 </resources>
