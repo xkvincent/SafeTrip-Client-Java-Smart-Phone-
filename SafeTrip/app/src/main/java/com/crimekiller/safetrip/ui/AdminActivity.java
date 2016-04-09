@@ -11,7 +11,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 
-import com.crimekiller.safetrip.Model.User;
+import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 
 import java.util.ArrayList;

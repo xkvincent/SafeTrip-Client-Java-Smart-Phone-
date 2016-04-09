@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.crimekiller.safetrip.Model.User;
+import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 
 import java.util.ArrayList;
