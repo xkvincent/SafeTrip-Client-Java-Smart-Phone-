@@ -13,13 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="260dp"
             android:layout_height="45dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="All Posts"
+            android:text="@string/View_All_Post_AllPostLabel"
             android:id="@+id/ViewALLPost_AllPosts"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/View_All_Post_Username"
                 android:id="@+id/ViewAllPost_Username" />
 
         </LinearLayout>
@@ -55,14 +55,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="@string/View_All_Post_Date"
                 android:layout_weight="0.4"
                 android:id="@+id/ViewAllPost_Date"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="License Plate"
+                android:text="@string/View_All_Post_Plate"
                 android:layout_weight="0.6"
                 android:id="@+id/ViewAllPost_LicensePlate"/>
 
@@ -76,14 +76,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Destination"
+                android:text="@string/View_All_Post_Destination"
                 android:layout_weight="0.4"
                 android:id="@+id/ViewAllPost_Destination"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Car Model"
+                android:text="@string/View_All_Post_Model"
                 android:layout_weight="0.6"
                 android:id="@+id/ViewAllPost_CarModel"/>
 
@@ -97,14 +97,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Car Color"
+                android:text="@string/View_All_Post_Color"
                 android:layout_weight="0.4"
                 android:id="@+id/ViewAllPost_CarColor"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Departure Place"
+                android:text="@string/View_All_Post_Departure"
                 android:layout_weight="0.6"
                 android:id="@+id/ViewAllPost_Departure"/>
 

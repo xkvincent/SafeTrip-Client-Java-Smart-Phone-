@@ -16,10 +16,10 @@
         android:layout_width="260dp"
         android:layout_height="45dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="New Post"
+        android:text="@string/New_Post_Label"
         android:id="@+id/NewPost_NewPost"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -28,22 +28,29 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/NewPost_Date"
+        android:hint="@string/New_Post_DateHint"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/NewPost_LicensePlate"
-        android:hint="License Plate:  Required"
-        android:layout_marginTop="20dp" />
+        android:hint="@string/New_Post_PlateHint"
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/NewPost_Destination"
         android:layout_marginTop="10dp"
-        android:hint="Destination: Required" />
+        android:hint="@string/New_Post_DestinationHint" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/NewPost_Model"
-        android:hint="Car Model: Optional"
+        android:hint="@string/New_Post_ModelHint"
         android:layout_marginTop="10dp" />
 
     <EditText
@@ -51,14 +58,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/NewPost_Color"
         android:layout_marginTop="10dp"
-        android:hint="Car Color: Optional" />
+        android:hint="@string/New_Post_ColorHint" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/NewPost_Departure"
         android:layout_marginTop="10dp"
-        android:hint="Departure Place: Optional" />
+        android:hint="@string/New_Post_DepartureHint" />
 
     <Button
         android:layout_width="wrap_content"
@@ -66,10 +73,10 @@
         android:textStyle="bold"
         android:background="@drawable/round"
         android:textColor="#CBD1DC"
-        android:text="Finish"
+        android:text="@string/New_Post_FinishBtn"
         android:id="@+id/NewPost_Finish"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.09"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

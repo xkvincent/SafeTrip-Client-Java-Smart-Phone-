@@ -19,7 +19,7 @@
             android:layout_width="260dp"
             android:layout_height="65dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="My Post"
+            android:text="@string/Self_Post_MyPostLabel"
             android:id="@+id/ViewSelfPost_MyPost"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:gravity="center"
-            android:text="Date"
+            android:text="@string/Self_Post_Date"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#fdfcfc"
             android:textStyle="bold" />
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:gravity="center"
-            android:text="Destination"
+            android:text="@string/Self_Post_Destination"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#fdfcfc"
             android:textStyle="bold" />
