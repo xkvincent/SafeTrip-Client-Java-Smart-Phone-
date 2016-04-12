@@ -1,11 +1,17 @@
 package com.crimekiller.safetrip.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Wenlu on 4/2/16.
+ * @Author Wenlu Zhang
+ * AndrewId:wenluz
  */
-public class User {
+
+ public class User implements Serializable {
+
+    private static final long serialVersionUID = -2278521314817998938L;
     private String name;
     private static ArrayList<User> users;
     public User(String name){

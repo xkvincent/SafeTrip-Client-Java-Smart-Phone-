@@ -55,6 +55,7 @@ public class UserPageActivity extends Activity{
             }
         });
         adminBT.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, AdminActivity.class);
