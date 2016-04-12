@@ -6,24 +6,24 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.shuangliang.safetrip.ViewDetailedSelfPostActivity"
-    tools:showIn="@layout/activity_view_detailed_self_post"
+    tools:showIn="@layout/ui_view_detailed_self_post_activity"
     android:orientation="vertical"
     android:weightSum="1">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="260dp"
             android:layout_height="45dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="My Post"
-            android:id="@+id/ViewSelfPost_MyPost"
+            android:text="@string/Detailed_Self_Post_MyPostLabel"
+            android:id="@+id/DetailedSelfPost_MyPost"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right">
                 <TextView android:id="@+id/DetailedSelfPost_DateLabel"
-                    android:text="Date"
+                    android:text="@string/Detailed_Self_Post_Date"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Date"
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/DetailedSelfPost_PlateLabel"
-                    android:text="License Plate"
+                    android:text="@string/Detailed_Self_Post_Plate"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Plate"
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/DetailedSelfPost_DestinationLabel"
-                    android:text="Destination"
+                    android:text="@string/Detailed_Self_Post_Destination"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Destination"
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/DetailedSelfPost_ModelLabel"
-                    android:text="Car Model"
+                    android:text="@string/Detailed_Self_Post_Model"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Model"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/DetailedSelfPost_ColorLabel"
-                    android:text="Car Color"
+                    android:text="@string/Detailed_Self_Post_Color"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Color"
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView android:id="@+id/DetailedSelfPost_DepartureLabel"
-                    android:text="Departure"
+                    android:text="@string/Detailed_Self_Post_Departure"
                     android:textColor="#0d0606"
                     android:textSize="14sp"></TextView>
                 <TextView android:id="@+id/DetailedSelfPost_Departure"
@@ -120,7 +120,7 @@
         android:textStyle="bold"
         android:background="@drawable/round"
         android:textColor="#CBD1DC"
-        android:text="Delete"
+        android:text="@string/Detailed_Self_Post_DeleteBtn"
         android:id="@+id/DetailedSelfPost_Delete"
         android:layout_weight="0.15"
         android:layout_gravity="center_horizontal" />

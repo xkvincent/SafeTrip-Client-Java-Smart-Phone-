@@ -3,7 +3,6 @@ package com.crimekiller.safetrip.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +18,7 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_post);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.ui_manage_post_activity);
 
         newPost  = (Button) findViewById(R.id.ManagePost_NewPost);
         allPost = (Button) findViewById(R.id.ManegePost_ViewAllPost);
