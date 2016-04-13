@@ -92,7 +92,7 @@ public class ViewSelfPostActivity extends AppCompatActivity {
                 String color= result.getString(result.getColumnIndex("color"));
                 String departure = result.getString(result.getColumnIndex("departure"));
 
-                Post aPost = new Post(date, plate,destination,model,color,departure," ");
+                Post aPost = new Post(date, plate,destination,model,color,departure,"");
                 postList.add(aPost);
             }
 

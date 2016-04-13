@@ -132,7 +132,7 @@ public class NewPostActivity extends AppCompatActivity {
         color = colorET.getText().toString();
         departure = departureET.getText().toString();
 
-        Post newPost = new Post(date, licensePlate,destination,model,color,departure," ");
+        Post newPost = new Post(date, licensePlate,destination,model,color,departure,"");
 
         // insert post into local database
         dbConnector.insertRecord(newPost);
