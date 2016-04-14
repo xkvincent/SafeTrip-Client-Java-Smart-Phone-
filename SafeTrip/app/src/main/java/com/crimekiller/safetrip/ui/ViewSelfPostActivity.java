@@ -1,14 +1,17 @@
 package com.crimekiller.safetrip.ui;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.crimekiller.safetrip.Model.Post;
-import com.crimekiller.safetrip .Model.SimplePostAdapter;
+import com.crimekiller.safetrip.dblayout.DBConnector;
+import com.crimekiller.safetrip.model.Post;
+import com.crimekiller.safetrip .model.SimplePostAdapter;
 import com.crimekiller.safetrip.R;
 
 import java.util.ArrayList;
@@ -23,18 +26,15 @@ public class ViewSelfPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_view_self_post_activity);
 
-        Post post1 = new Post("3/10/2016", "F1234", "SafeWay", "Camry", "red", "CMU");
-        Post post2 = new Post("3/21/2016", "DA123", "BestBuy", "Ford", "black", "CMU");
-
-        postList.add(post1);
-        postList.add(post2);
+        selfPostListView = (ListView) findViewById(R.id.ViewSelfPost_SelfPostList);
+        new loadPostTask().execute();
 
         SimplePostAdapter adapter = new SimplePostAdapter(this, postList);
-
-        selfPostListView = (ListView) findViewById(R.id.ViewSelfPost_SelfPostList); // get the built-in ListView
         selfPostListView.setAdapter(adapter);
 
         selfPostListView.setOnItemClickListener(viewDetailedPost);
+
+
     }
 
     AdapterView.OnItemClickListener viewDetailedPost = new AdapterView.OnItemClickListener()
@@ -61,6 +61,45 @@ public class ViewSelfPostActivity extends AppCompatActivity {
 
     }; // end viewContactListener
 
+
+
+    private class loadPostTask extends AsyncTask<Long, Object, Cursor>
+    {
+        DBConnector databaseConnector = new DBConnector(ViewSelfPostActivity.this);
+
+        // perform the database access
+        @Override
+        protected Cursor doInBackground(Long... params)
+        {
+            databaseConnector.open();
+
+            // get a cursor containing all data on given entry
+            return databaseConnector.getAllRecords();
+        } // end method doInBackground
+
+        // use the Cursor returned from the doInBackground method
+        @Override
+        protected void onPostExecute(Cursor result)
+        {
+            super.onPostExecute(result);
+
+            while (result.moveToNext()) {
+
+                String date = result.getString(result.getColumnIndex("date"));
+                String plate = result.getString(result.getColumnIndex("licenseplate"));
+                String destination = result.getString(result.getColumnIndex("destination"));
+                String model = result.getString(result.getColumnIndex("model"));
+                String color= result.getString(result.getColumnIndex("color"));
+                String departure = result.getString(result.getColumnIndex("departure"));
+
+                Post aPost = new Post(date, plate,destination,model,color,departure,"");
+                postList.add(aPost);
+            }
+
+            result.close(); // close the result cursor
+            databaseConnector.close(); // close database connection
+        } // end method onPostExecute
+    } // end class LoadContactTask
 
 
 }

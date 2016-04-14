@@ -12,14 +12,14 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 
-import com.crimekiller.safetrip.Model.User;
+import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class AdminActivity extends ListActivity {
@@ -33,15 +33,17 @@ public class AdminActivity extends ListActivity {
     public final int PORT = 4000;
     private ObjectInputStream objInputStream = null;
     private ObjectOutputStream objOutputStream = null;
+    private String command = "Administrate User";
 
     @Override
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
-        connect();
 
         searchUserView = (SearchView) findViewById(R.id.searchUserView);
         searchUserView.setQueryHint("SearchUser");
+
+        connect();
     }
 
     public void connect(){
@@ -49,35 +51,39 @@ public class AdminActivity extends ListActivity {
         AsyncTask<Void,ArrayList<User>,Void> read = new AsyncTask<Void, ArrayList<User>, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                try {
-                    socket = new Socket(LocalHost, PORT);
-                    objInputStream = new ObjectInputStream(socket.getInputStream());
-                    objOutputStream = new ObjectOutputStream(socket.getOutputStream());
-
-                    objOutputStream.writeObject("Administrate User");
-
-                    // Get response from server
-
-                    try {
-                        userList = (ArrayList<User>) objInputStream.readObject();
-                        System.out.println(" Server Response: " + userList.size());
-
-                        objOutputStream.close();
-                        objInputStream.close();
-                        socket.close();
-
-                    } catch (IOException | ClassNotFoundException e) {
-                        System.out.println("ClassNotFoundException ");
-                        e.printStackTrace();
-                    }
-
-                    publishProgress(userList);
-
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                socketClient.run();
+                userList = socketClient.getUserList();
+                publishProgress(userList);
+//                try {
+//                    socket = new Socket(LocalHost, PORT);
+//                    objInputStream = new ObjectInputStream(socket.getInputStream());
+//                    objOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//
+//                    objOutputStream.writeObject("Administrate User");
+//
+//                    // Get response from server
+//
+//                    try {
+//                        userList = (ArrayList<User>) objInputStream.readObject();
+//                        System.out.println(" Server Response: " + userList.size());
+//
+//                        objOutputStream.close();
+//                        objInputStream.close();
+//                        socket.close();
+//
+//                    } catch (IOException | ClassNotFoundException e) {
+//                        System.out.println("ClassNotFoundException ");
+//                        e.printStackTrace();
+//                    }
+//
+//
+//
+//                } catch (UnknownHostException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 return null;
             }
 

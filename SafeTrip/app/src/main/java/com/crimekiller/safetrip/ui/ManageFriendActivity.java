@@ -12,7 +12,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.crimekiller.safetrip.Model.User;
+import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 
 
@@ -28,20 +29,21 @@ public class ManageFriendActivity extends Activity {
     private SearchView searchFriendsView;
     private Button viewPendingRequestsBtn;
     private ListView friendsListView;
-    private ArrayList<User> friendsList;
+    private ArrayList<User> friendList;
     private Socket socket;
 
    // public final String LocalHost = "10.0.2.2";
-   public final String LocalHost = "10.0.2.2";
+    public final String LocalHost = "10.0.2.2";
     public final int PORT = 4000;
     private ObjectInputStream objInputStream = null;
     private ObjectOutputStream objOutputStream = null;
+    private String command = "Manage Friend";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_manage_friend_activity);
-        friendsList = new ArrayList<User>();
+        friendList = new ArrayList<User>();
         connect();
 
         searchFriendsView=(SearchView) findViewById(R.id.searchFriendsView);
@@ -85,35 +87,39 @@ public class ManageFriendActivity extends Activity {
             AsyncTask<Void,ArrayList<User>,Void> read = new AsyncTask<Void, ArrayList<User>, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
-                    try {
-                        socket = new Socket(LocalHost, PORT);
-                        objInputStream = new ObjectInputStream(socket.getInputStream());
-                        objOutputStream = new ObjectOutputStream(socket.getOutputStream());
-
-                        objOutputStream.writeObject("Manage Friend");
-
-                        // Get response from server
-
-                        try {
-                            friendsList = (ArrayList<User>) objInputStream.readObject();
-                            System.out.println(" Server Response: " + friendsList.size());
-
-                            objOutputStream.close();
-                            objInputStream.close();
-                            socket.close();
-
-                        } catch (IOException | ClassNotFoundException e) {
-                            System.out.println("ClassNotFoundException ");
-                            e.printStackTrace();
-                        }
-
-                        publishProgress(friendsList);
-
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                    socketClient.run();
+                    friendList = socketClient.getFriends();
+                    publishProgress(friendList);
+//                    try {
+//                        socket = new Socket(LocalHost, PORT);
+//                        objInputStream = new ObjectInputStream(socket.getInputStream());
+//                        objOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//
+//                        objOutputStream.writeObject("Manage Friend");
+//
+//                        // Get response from server
+//
+//                        try {
+//                            friendsList = (ArrayList<User>) objInputStream.readObject();
+//                            System.out.println(" Server Response: " + friendsList.size());
+//
+//                            objOutputStream.close();
+//                            objInputStream.close();
+//                            socket.close();
+//
+//                        } catch (IOException | ClassNotFoundException e) {
+//                            System.out.println("ClassNotFoundException ");
+//                            e.printStackTrace();
+//                        }
+//
+//                        publishProgress(friendsList);
+//
+//                    } catch (UnknownHostException e) {
+//                        e.printStackTrace();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                     return null;
                 }
 
@@ -121,7 +127,7 @@ public class ManageFriendActivity extends Activity {
                 protected void onProgressUpdate(ArrayList<User>... values) {
 
                     friendsListView = (ListView) findViewById(R.id.friendslistview);
-                    FriendListAdapter adapter= new FriendListAdapter(friendsList);
+                    FriendListAdapter adapter= new FriendListAdapter(friendList);
                     friendsListView.setAdapter(adapter);
                     super.onProgressUpdate(values);
                 }

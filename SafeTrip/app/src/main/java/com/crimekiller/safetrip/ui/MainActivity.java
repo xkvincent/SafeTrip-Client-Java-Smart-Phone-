@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.crimekiller.safetrip.R;
+import com.crimekiller.safetrip.ws.local.NotificationService;
 
 public class MainActivity extends Activity{
 
@@ -26,6 +27,9 @@ public class MainActivity extends Activity{
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//to 2
+
+                startService(new Intent(MainActivity.this,NotificationService.class));
+
                 Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
                 startActivity(intent);
             }

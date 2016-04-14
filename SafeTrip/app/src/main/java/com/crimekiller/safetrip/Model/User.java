@@ -1,4 +1,3 @@
-
 package com.crimekiller.safetrip.Model;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  * AndrewId:wenluz
  */
 
-public class User implements Serializable {
+ public class User implements Serializable {
 
     private static final long serialVersionUID = -2278521314817998938L;
 
@@ -26,6 +25,7 @@ public class User implements Serializable {
         this.email = email;
 
     }
+
 
     public static ArrayList<User> getUser(){
         users = new ArrayList<User>();
