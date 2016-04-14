@@ -1,4 +1,4 @@
-package com.crimekiller.safetrip.DBLayout;
+package com.crimekiller.safetrip.dblayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.crimekiller.safetrip.Model.Post;
+import com.crimekiller.safetrip.model.Post;
 
 /**
  * Created by shuangliang on 4/12/16.

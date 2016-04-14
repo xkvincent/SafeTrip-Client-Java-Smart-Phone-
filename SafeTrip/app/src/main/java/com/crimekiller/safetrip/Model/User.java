@@ -1,4 +1,4 @@
-package com.crimekiller.safetrip.Model;
+package com.crimekiller.safetrip.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ import java.util.ArrayList;
         this.email = email;
 
     }
-
 
     public static ArrayList<User> getUser(){
         users = new ArrayList<User>();
