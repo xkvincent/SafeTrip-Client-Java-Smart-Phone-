@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.EditPasswordActivity" />
-        <activity android:name=".ui.ManageUsernameActivity" />
         <activity android:name=".ui.MyProfileActivity" />
         <activity android:name=".ui.UserPageActivity" />
         <activity android:name=".ui.SignUpActivity" />

@@ -13,7 +13,7 @@ import com.crimekiller.safetrip.R;
  */
 public class MyProfileActivity extends Activity{
 
-    private Button manageUsernameBt;
+//    private Button manageUsernameBt;
     private Button editPasswordBt;
 
 
@@ -22,18 +22,17 @@ public class MyProfileActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_myprofile_activity);
 
-        manageUsernameBt = (Button)findViewById(R.id.myProfile_manage);
+//        manageUsernameBt = (Button)findViewById(R.id.myProfile_manage);
         editPasswordBt = (Button)findViewById(R.id.myProfile_edit);
 //        manageUsernameBt.setOnClickListener(this);
 //        editPasswordBt.setOnClickListener(this);
 
-        manageUsernameBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//to 8
-                Intent intent = new Intent(MyProfileActivity.this, ManageUsernameActivity.class);
-                startActivity(intent);
-            }
-        });
+//        manageUsernameBt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {//to 8
+//                startActivity(intent);
+//            }
+//        });
 
         editPasswordBt.setOnClickListener(new View.OnClickListener() {
             @Override
