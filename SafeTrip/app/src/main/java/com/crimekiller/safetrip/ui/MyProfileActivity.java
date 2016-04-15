@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.crimekiller.safetrip.R;
 
@@ -20,6 +21,7 @@ public class MyProfileActivity extends Activity{
 
 //    private Button manageUsernameBt;
     private Button editPasswordBt;
+    private TextView textView;
     private String username;//?
 
     private Socket socket;
@@ -37,6 +39,9 @@ public class MyProfileActivity extends Activity{
         Intent intent = getIntent();//?  get the username from former activity
         username = intent.getStringExtra("username");//?
         Log.d("MyprofileActivity", username);//?
+
+        textView = (TextView)findViewById(R.id.myProfile_textView6);
+        textView.setText("Username: "+username);// ??
 
 //        manageUsernameBt = (Button)findViewById(R.id.myProfile_manage);
         editPasswordBt = (Button)findViewById(R.id.myProfile_edit);
