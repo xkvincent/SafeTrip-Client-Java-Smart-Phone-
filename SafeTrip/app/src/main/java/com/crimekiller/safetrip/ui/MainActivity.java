@@ -24,8 +24,10 @@ public class MainActivity extends Activity {
 
     private Button loginButton;
     private Button signupButton;
-    private EditText editText;  //?
+    private EditText editText1;  //?
+    private EditText editText2;
     private String username;//?this is the username need to be passed to all of the activities
+    private String password;
 
     private Socket socket;
     public final String LocalHost = "10.0.2.2";
@@ -39,7 +41,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_main_activity);
 
-        editText = (EditText) findViewById(R.id.logIn_text1);//?
+        editText1 = (EditText) findViewById(R.id.logIn_text1);//??
+        editText2 = (EditText)findViewById(R.id.logIn_text2);//??
 
         loginButton = (Button) findViewById(R.id.logIn_login);
         signupButton = (Button) findViewById(R.id.logIn_signUp);
@@ -51,8 +54,10 @@ public class MainActivity extends Activity {
             public void onClick(View v) {//to 2
 
                 startService(new Intent(MainActivity.this, NotificationService.class));
-                username = editText.getText().toString();//?
+                username = editText1.getText().toString();//?
+                password = editText2.getText().toString();//??
                 Log.d("MianActivity", username);//?
+                Log.d("MianActivity", password);//??
 
                 if(connect()) {
 
@@ -71,7 +76,7 @@ public class MainActivity extends Activity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//to 3
-                username = editText.getText().toString();//?
+                username = editText1.getText().toString();//?
                 Log.d("MianActivity", username);//?
 
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
@@ -88,8 +93,10 @@ public class MainActivity extends Activity {
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                DefaultSocketClient socketClient = new DefaultSocketClient(command,username,password);
                 socketClient.run();
+
+                return socketClient.getResult();//??
 
             //返回一个Boolean就行了
 
@@ -97,7 +104,7 @@ public class MainActivity extends Activity {
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-                return false;
+  //              return false;
             }
 
 //            @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
@@ -26,6 +27,14 @@ public class EditPasswordActivity extends Activity{
 
     private Button finishBt;
     private String username;//?
+    private Boolean result;//??
+    private EditText editText1;//??
+    private EditText editText2;
+    private EditText editText3;
+    private String oldPassword;//??
+    private String newPassword;
+    private String newPassword2;
+
 
     private Socket socket;
     public final String LocalHost = "10.0.2.2";
@@ -43,19 +52,34 @@ public class EditPasswordActivity extends Activity{
         username = intent.getStringExtra("username");//?
         Log.d("EditActivity", username);//?
 
+        editText1 = (EditText)findViewById(R.id.editPassword_old);//?
+        editText2 = (EditText)findViewById(R.id.editPassword_password);//?
+        editText3 = (EditText)findViewById(R.id.editPassword_password2);//?
+
+        oldPassword = editText1.getText().toString();//??
+        newPassword = editText2.getText().toString();
+        newPassword2 = editText3.getText().toString();
+
         finishBt = (Button)findViewById(R.id.editPassword_finish2);
 //        finishBt.setOnClickListener(this);
 
         finishBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//to 5
-                if(connect()) {
-                    Intent intent = new Intent(EditPasswordActivity.this, MyProfileActivity.class);
-                    startActivity(intent);
-                }
-                else{// input wrong old password or twice new are not same
-                    Toast.makeText(EditPasswordActivity.this, "Fail to Edit Password!",
+                //if twice new password not same
+                if(!newPassword.equals(newPassword2)){
+                    Toast.makeText(EditPasswordActivity.this, "New password are not same! ",
                             Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (connect()) {
+                        Intent intent = new Intent(EditPasswordActivity.this,
+                                MyProfileActivity.class);
+                        startActivity(intent);
+                    } else {// input wrong old password
+                        Toast.makeText(EditPasswordActivity.this, "Fail to Edit Password!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -79,16 +103,18 @@ public class EditPasswordActivity extends Activity{
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                DefaultSocketClient socketClient = new DefaultSocketClient(command,username,
+                        oldPassword,newPassword);
                 socketClient.run();
 
+                return socketClient.getResult();
                 //返回一个Boolean就行了
 
 
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-                return false;
+//                return false;
             }
 
 //            @Override

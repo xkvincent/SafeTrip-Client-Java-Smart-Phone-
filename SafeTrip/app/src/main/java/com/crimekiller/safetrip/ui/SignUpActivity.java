@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
@@ -23,6 +24,15 @@ import java.util.ArrayList;
 public class SignUpActivity extends Activity{
 
     private Button signupButton;
+    private EditText editText1;//??
+    private EditText editText2;
+    private EditText editText3;
+    private EditText editText4;
+
+    private String username;//??
+    private String email;
+    private String password;
+    private String password2;
 
     private Socket socket;
     public final String LocalHost = "10.0.2.2";
@@ -36,20 +46,37 @@ public class SignUpActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_signup_activity);
 
+        editText1 = (EditText)findViewById(R.id.signUp_username);//??
+        editText2 = (EditText)findViewById(R.id.signUp_email);//??
+        editText3 = (EditText)findViewById(R.id.signUp_password);//??
+        editText4 = (EditText)findViewById(R.id.signUp_password2);//??
+
         signupButton = (Button)findViewById(R.id.signUp_signUP);
 //        signupButton.setOnClickListener(this);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//to 2
-                if(connect()) {
 
-                    Intent intent = new Intent(SignUpActivity.this, UserPageActivity.class);
-                    startActivity(intent);
-                }
-                else{//when username existe or twice password not same
-                    Toast.makeText(SignUpActivity.this, "Fail to Create User!",
+                username = editText1.getText().toString();//?
+                email = editText2.getText().toString();//?
+                password = editText3.getText().toString();//?
+                password2 = editText4.getText().toString();//?
+
+                //when twice password not same
+                if(!password.equals(password2)){
+                    Toast.makeText(SignUpActivity.this, "Input Different Password! ",
                             Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (connect()) {
+
+                        Intent intent = new Intent(SignUpActivity.this, UserPageActivity.class);
+                        startActivity(intent);
+                    } else {//when username existe or twice password not same
+                        Toast.makeText(SignUpActivity.this, "Fail to Create User!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -78,17 +105,18 @@ public class SignUpActivity extends Activity{
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                DefaultSocketClient socketClient = new DefaultSocketClient(
+                        command,username,email,password);
                 socketClient.run();
 
-
+                return socketClient.getResult();
             //返回一个Boolean就行了
 
 
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-                return null;
+//                return null;
             }
 
 //            @Override
