@@ -3,6 +3,7 @@ package com.crimekiller.safetrip.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +15,16 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
 
     private Button newPost,allPost, selfPost;
     private Intent i;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_manage_post_activity);
+
+        Intent intent = getIntent();//?  get the username from former activity
+        username = intent.getStringExtra("username");//?
+        Log.d("ManagePostActivity", username);//?
 
         newPost  = (Button) findViewById(R.id.ManagePost_NewPost);
         allPost = (Button) findViewById(R.id.ManegePost_ViewAllPost);
@@ -51,6 +57,8 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void onClick(View v) {
 
         switch (v.getId()){
@@ -71,6 +79,7 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
 
         }
         // start activity
+        i.putExtra("username", username);//?
         startActivity(i);
     }
 
