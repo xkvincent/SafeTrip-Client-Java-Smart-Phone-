@@ -2,20 +2,25 @@ package com.crimekiller.safetrip.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
+import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
     private Button loginButton;
     private Button signupButton;
@@ -27,7 +32,7 @@ public class MainActivity extends Activity{
     public final int PORT = 4000;
     private ObjectInputStream objInputStream = null;
     private ObjectOutputStream objOutputStream = null;
-    private String command = "SignIn";
+    private String command = "Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,8 @@ public class MainActivity extends Activity{
 
         editText = (EditText) findViewById(R.id.logIn_text1);//?
 
-        loginButton = (Button)findViewById(R.id.logIn_login);
-        signupButton = (Button)findViewById(R.id.logIn_signUp);
+        loginButton = (Button) findViewById(R.id.logIn_login);
+        signupButton = (Button) findViewById(R.id.logIn_signUp);
 //        loginButton.setOnClickListener(this);
 //        loginButton.setOnClickListener(this);
 
@@ -45,13 +50,20 @@ public class MainActivity extends Activity{
             @Override
             public void onClick(View v) {//to 2
 
-                startService(new Intent(MainActivity.this,NotificationService.class));
+                startService(new Intent(MainActivity.this, NotificationService.class));
                 username = editText.getText().toString();//?
                 Log.d("MianActivity", username);//?
 
-                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-                intent.putExtra("username", username);//?
-                startActivity(intent);
+                if(connect()) {
+
+                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                    intent.putExtra("username", username);//?
+                    startActivity(intent);
+                }
+                else{  //?? when input wrong user data
+                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -71,22 +83,34 @@ public class MainActivity extends Activity{
     }
 
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.ui_main_activity:    //to 2
-//                Intent intent = new Intent(MainActivity.this, UserPage_Activity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.ui_signup_activity:   //to 3
-//                Intent intent2 = new Intent(MainActivity.this, SignUp_Activity.class);
-//                startActivity(intent2);
-//                break;
-//            default:
-//                break;
+    public Boolean connect(){//when input right username and password, return truth
+
+        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                socketClient.run();
+
+            //返回一个Boolean就行了
+
+
+//                userList = socketClient.getUserList();
+//                publishProgress(userList);
+
+                return false;
+            }
+
+//            @Override
+//            protected void onProgressUpdate(ArrayList<User>... values) {
 //
-//        }
-//    }
+//                UserAdapter adapter = new UserAdapter(userList);
+//                setListAdapter(adapter);
+//                super.onProgressUpdate(values);
+//            }
+        };
+        read.execute();
+        return false;
+    }
 
 
 }
