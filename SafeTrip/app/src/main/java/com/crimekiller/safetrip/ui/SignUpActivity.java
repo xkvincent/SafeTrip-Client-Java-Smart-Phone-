@@ -8,12 +8,23 @@ import android.widget.Button;
 
 import com.crimekiller.safetrip.R;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
 /**
  * Created by xuvincent on 16/4/2.
  */
 public class SignUpActivity extends Activity{
 
     private Button signupButton;
+
+    private Socket socket;
+    public final String LocalHost = "10.0.2.2";
+    public final int PORT = 4000;
+    private ObjectInputStream objInputStream = null;
+    private ObjectOutputStream objOutputStream = null;
+    private String command = "SignUp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

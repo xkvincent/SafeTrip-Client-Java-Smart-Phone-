@@ -3,6 +3,7 @@ package com.crimekiller.safetrip.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,12 +18,17 @@ public class UserPageActivity extends Activity{
     private Button postBT;
     private Button friendsBT;
     private Button adminBT;
+    private String username;//?
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_userpage_activity);
+
+        Intent intent = getIntent();//?  get the username from former activity
+        username = intent.getStringExtra("username");//?
+        Log.d("UserPageActivity", username);//?
 
         profileBT = (Button)findViewById(R.id.userPage_myProfile);
         postBT = (Button)findViewById(R.id.userPage_post);
@@ -35,7 +41,9 @@ public class UserPageActivity extends Activity{
         profileBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//to 5
+
                 Intent intent = new Intent(UserPageActivity.this, MyProfileActivity.class);
+                intent.putExtra("username", username);//?
                 startActivity(intent);
             }
         });
@@ -44,6 +52,7 @@ public class UserPageActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManagePostActivity.class);
+                intent.putExtra("username", username);//?
                 startActivity(intent);
             }
         });
@@ -51,6 +60,7 @@ public class UserPageActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManageFriendActivity.class);
+                intent.putExtra("username", username);//?
                 startActivity(intent);
             }
         });
@@ -59,6 +69,7 @@ public class UserPageActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, AdminActivity.class);
+                intent.putExtra("username", username);//?
                 startActivity(intent);
             }
         });
