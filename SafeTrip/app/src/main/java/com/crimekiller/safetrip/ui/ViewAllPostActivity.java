@@ -8,8 +8,8 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.crimekiller.safetrip.R;
-import com.crimekiller.safetrip.Model.AllPostAdapter;
-import com.crimekiller.safetrip.Model.Post;
+import com.crimekiller.safetrip.model.AllPostAdapter;
+import com.crimekiller.safetrip.model.Post;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -50,52 +50,58 @@ public class ViewAllPostActivity extends AppCompatActivity {
 
     }
 
-    public void loadAllPostTask(){
 
-        AsyncTask<Void,ArrayList<Post>,Void> getAllPost = new AsyncTask<Void, ArrayList<Post>, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    socket = new Socket(LocalHost, PORT);
-                    objInputStream = new ObjectInputStream(socket.getInputStream());
-                    objOutputStream = new ObjectOutputStream(socket.getOutputStream());
+    public void loadAllPostTask()  {
+        AsyncTask<Object, Object, Object> getAllPost =
+                new AsyncTask<Object, Object, Object>()
+                {
+                    @Override
+                    protected Object doInBackground(Object... params)
+                    {
 
-                    objOutputStream.writeObject(command);
-                    objOutputStream.flush();
-                    objOutputStream.writeObject(username);
-                    objOutputStream.flush();
+                        try {
+                            socket = new Socket(LocalHost, PORT);
+                            objInputStream = new ObjectInputStream(socket.getInputStream());
+                            objOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                    // Get response from server
-                    try {
-                        postList = (ArrayList<Post>)objInputStream.readObject();
-                        System.out.println(" Server Response: " + postList.size());
+                            objOutputStream.writeObject(command);
+                            objOutputStream.flush();
+                            objOutputStream.writeObject(username);
+                            objOutputStream.flush();
 
-                        objOutputStream.close();
-                        objInputStream.close();
-                        socket.close();
+                            // Get response from server
+                            try {
+                                postList = (ArrayList<Post>)objInputStream.readObject();
+                                System.out.println(" Server Response: " + postList.size());
 
-                    } catch (IOException | ClassNotFoundException e) {
-                        System.out.println("ClassNotFoundException ");
-                        e.printStackTrace();
-                    }
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                                objOutputStream.close();
+                                objInputStream.close();
+                                socket.close();
 
-                return null;
-            }
+                            } catch (IOException | ClassNotFoundException e) {
+                                System.out.println("ClassNotFoundException ");
+                                e.printStackTrace();
+                            }
+                        } catch (UnknownHostException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-            @Override
-            protected void onProgressUpdate(ArrayList<Post>... values) {
+                        return null;
+                    } // end method doInBackground
 
-                AllPostAdapter adapter = new AllPostAdapter(ViewAllPostActivity.this, postList);
-                AllPostListView.setAdapter(adapter);
-                super.onProgressUpdate(values);
-            }
-        };
-        getAllPost.execute();
+                    @Override
+                    protected void onPostExecute(Object result)
+                    {
+                        AllPostAdapter adapter = new AllPostAdapter(ViewAllPostActivity.this, postList);
+                        AllPostListView.setAdapter(adapter);
+
+                    } // end method onPostExecute
+                }; // end AsyncTask
+
+        // save the post to the database using a separate thread
+        getAllPost.execute((Object[]) null);
     }
 
 }
