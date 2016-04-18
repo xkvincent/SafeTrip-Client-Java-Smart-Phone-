@@ -31,11 +31,36 @@ public class DefaultSocketClient extends Thread
 	private ArrayList<User> friendsList;
     private ArrayList<User> userList;
 
+	private String username;//??
+	private String password;//??
+	private Boolean result;//??
+	private String oldPassword;
+	private String newPassword;
+
 	public DefaultSocketClient(String command){
 		this.command = command;
 		this.friendsList = new ArrayList<User>();
         this.userList = new ArrayList<User>();
 	}
+
+	public DefaultSocketClient(String command, String username, String password){ //???
+		this.command = command;
+		this.username = username;
+		this.password = password;
+//		this.friendsList = new ArrayList<User>();
+//		this.userList = new ArrayList<User>();
+	}
+
+	public DefaultSocketClient(String command,String username,
+								   String oldPassword, String newPassword){	//???
+		this.command = command;
+		this.username = username;
+		this.oldPassword = oldPassword; //!!在signup中看成email
+		this.newPassword = newPassword;	//!!在signup中看成password
+//		this.friendsList = new ArrayList<User>();
+//		this.userList = new ArrayList<User>();
+	}
+
 	public void run(){
 		if(openConnection()){
 			handleSession();
@@ -73,7 +98,21 @@ public class DefaultSocketClient extends Thread
             }else if(command.equals("Administrate User")){
                 userList = (ArrayList<User>) objInputStream.readObject();
                 System.out.println(" Server Response: " + userList.size());
-            }
+            }else if(command.equals("Login")){	//??
+				String data = username + ";" + password;
+				objOutputStream.writeObject(data);//不知道这一步对不对??
+				result = (Boolean)objInputStream.readObject();
+//				String receive = (String)objInputStream.readObject();
+//				String buf[] = receive.split(",");
+				//username = (String)objInputStream.readObject();
+				//password = (String)objInputStream.readObject();
+//				username = buf[0];
+//				password = buf[1];
+//				System.out.println(" Username: " + username + "; Password:" + password);
+
+//			}else if( command.equals("MyProfile") ){
+
+			}
 
 
 		} catch (IOException | ClassNotFoundException e) {
@@ -101,4 +140,18 @@ public class DefaultSocketClient extends Thread
     public ArrayList<User> getFriends() {
         return friendsList;
     }
+
+//	public String getUsername(){//??
+//		return username;
+//	}
+//
+//	public String getPassword(){//??
+//		return password;
+//	}
+
+	public Boolean getResult(){//??
+		return result;
+	}
+
+
 }
