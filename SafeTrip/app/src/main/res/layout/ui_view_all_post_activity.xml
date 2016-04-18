@@ -28,91 +28,11 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Username"
-                android:id="@+id/ViewAllPost_Username" />
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Date"
-                android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_Date"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Plate"
-                android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_LicensePlate"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Destination"
-                android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_Destination"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Model"
-                android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_CarModel"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Color"
-                android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_CarColor"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/View_All_Post_Departure"
-                android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_Departure"/>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
+    <ListView
+        android:id="@+id/ViewAllPost_AllPostList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#d1fbf8"></ListView>
 
 
 </LinearLayout>
