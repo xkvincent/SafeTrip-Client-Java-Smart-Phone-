@@ -75,19 +75,15 @@ public class DBConnector {
     // get a Cursor containing all information about the score specified
     // by the given id
 
-    public Cursor getOneRecordById(long id)
-
-    {
-        long recordID = id+1;
-        return database.query(
-                TABLE_NAME, null, "_id=" + recordID, null, null, null, null);
-    } // end method
 
     // delete the result specified by the given String name
-    public void deleteRecord(long id)
+    public void deleteRecord(Post post)
     {
         open(); // open the database
-        database.delete(TABLE_NAME, "_id=" + id, null);
+        String where = "date = ?" + " AND owner = ?" + " AND licenseplate = ?";
+        String[] whereArgs = {post.getDate(),post.getOwner(),post.getLicensePlate()};
+        database.delete(TABLE_NAME,where,whereArgs);
+
         close(); // close the database
     } // end method
 

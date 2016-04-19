@@ -53,6 +53,7 @@ public class ViewSelfPostActivity extends AppCompatActivity {
             // create an Intent to launch the ViewContact Activity
             Intent viewDetailedPost =
                     new Intent(ViewSelfPostActivity.this, ViewDetailedSelfPostActivity.class);
+            viewDetailedPost.putExtra("username", username);
 
             Post post = postList.get(position);
 
@@ -63,6 +64,7 @@ public class ViewSelfPostActivity extends AppCompatActivity {
             viewDetailedPost.putExtra("MODEL", post.getModel());
             viewDetailedPost.putExtra("COLOR", post.getColor());
             viewDetailedPost.putExtra("DEPARTURE", post.getDeparture());
+            viewDetailedPost.putExtra("OWNER",post.getOwner());
             startActivity(viewDetailedPost); // start the ViewContact Activity
         } // end method onItemClick
 
@@ -102,7 +104,7 @@ public class ViewSelfPostActivity extends AppCompatActivity {
                     String color= result.getString(result.getColumnIndex("color"));
                     String departure = result.getString(result.getColumnIndex("departure"));
 
-                    Post aPost = new Post(date, plate,destination,model,color,departure,"");
+                    Post aPost = new Post(date, plate,destination,model,color,departure,owner);
                     postList.add(aPost);
 
                 }
