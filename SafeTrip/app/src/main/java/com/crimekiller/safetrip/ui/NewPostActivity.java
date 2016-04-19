@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.crimekiller.safetrip.client.DefaultSocketClient;
-import com.crimekiller.safetrip.dblayout.DBConnector;
+import com.crimekiller.safetrip.DBLayout.DBConnector;
 import com.crimekiller.safetrip.model.Post;
 import com.crimekiller.safetrip.R;
 
@@ -132,6 +131,7 @@ public class NewPostActivity extends AppCompatActivity {
                             {
                                 //finish(); // return to the previous Activity
                                 Intent i = new Intent(NewPostActivity.this, ViewSelfPostActivity.class);
+                                i.putExtra("username", username);
                                 startActivity(i);
                             } // end method onPostExecute
                         }; // end AsyncTask

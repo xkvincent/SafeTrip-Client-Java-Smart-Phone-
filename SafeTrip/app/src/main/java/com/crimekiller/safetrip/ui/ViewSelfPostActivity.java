@@ -5,11 +5,12 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.crimekiller.safetrip.dblayout.DBConnector;
+import com.crimekiller.safetrip.DBLayout.DBConnector;
 import com.crimekiller.safetrip.model.Post;
 import com.crimekiller.safetrip .model.SimplePostAdapter;
 import com.crimekiller.safetrip.R;
@@ -20,9 +21,15 @@ public class ViewSelfPostActivity extends AppCompatActivity {
 
     private ArrayList<Post> postList = new ArrayList<Post>();
     private ListView selfPostListView;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent = getIntent();//?  get the username from former activity
+        username = intent.getStringExtra("username");//?
+        Log.d("ViewSelfPostActivity", username);//?
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_view_self_post_activity);
 
@@ -82,18 +89,24 @@ public class ViewSelfPostActivity extends AppCompatActivity {
         protected void onPostExecute(Cursor result)
         {
             super.onPostExecute(result);
+            String owner;
 
             while (result.moveToNext()) {
+                owner = result.getString(result.getColumnIndex("owner"));
 
-                String date = result.getString(result.getColumnIndex("date"));
-                String plate = result.getString(result.getColumnIndex("licenseplate"));
-                String destination = result.getString(result.getColumnIndex("destination"));
-                String model = result.getString(result.getColumnIndex("model"));
-                String color= result.getString(result.getColumnIndex("color"));
-                String departure = result.getString(result.getColumnIndex("departure"));
+                if (owner.equals(username)) {
+                    String date = result.getString(result.getColumnIndex("date"));
+                    String plate = result.getString(result.getColumnIndex("licenseplate"));
+                    String destination = result.getString(result.getColumnIndex("destination"));
+                    String model = result.getString(result.getColumnIndex("model"));
+                    String color= result.getString(result.getColumnIndex("color"));
+                    String departure = result.getString(result.getColumnIndex("departure"));
 
-                Post aPost = new Post(date, plate,destination,model,color,departure,"");
-                postList.add(aPost);
+                    Post aPost = new Post(date, plate,destination,model,color,departure,"");
+                    postList.add(aPost);
+
+                }
+
             }
 
             result.close(); // close the result cursor

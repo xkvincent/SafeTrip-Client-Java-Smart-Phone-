@@ -1,4 +1,4 @@
-package com.crimekiller.safetrip.dblayout;
+package com.crimekiller.safetrip.DBLayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -52,6 +52,7 @@ public class DBConnector {
         newPost.put("model", post.getModel());
         newPost.put("color", post.getColor());
         newPost.put("departure", post.getDeparture());
+        newPost.put("owner",post.getOwner());
 
         open(); // open the database
         database.insert(TABLE_NAME, null, newPost);
@@ -106,7 +107,7 @@ public class DBConnector {
                     + "(_id integer primary key autoincrement, date text NOT NULL, "
                     + "licenseplate text NOT NULL, "
                     + "destination text NOT NULL, "
-                    + "model text, color text, departure text); ";
+                    + "model text, color text, departure text, owner text); ";
 
             db.execSQL(createQuery); // execute the query
             Log.v("TAG", "Schema Set up Successfully!");
