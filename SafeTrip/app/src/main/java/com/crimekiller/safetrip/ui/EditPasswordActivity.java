@@ -103,18 +103,18 @@ public class EditPasswordActivity extends Activity{
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command,username,
+                /*DefaultSocketClient socketClient = new DefaultSocketClient(command,username,
                         oldPassword,newPassword);
                 socketClient.run();
 
-                return socketClient.getResult();
+                return socketClient.getResult();*/
                 //返回一个Boolean就行了
 
 
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-//                return false;
+                return false;
             }
 
 //            @Override

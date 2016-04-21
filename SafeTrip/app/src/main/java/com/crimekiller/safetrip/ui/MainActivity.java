@@ -53,22 +53,26 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {//to 2
 
-                startService(new Intent(MainActivity.this, NotificationService.class));
+
                 username = editText1.getText().toString();//?
                 password = editText2.getText().toString();//??
                 Log.d("MianActivity", username);//?
                 Log.d("MianActivity", password);//??
 
-                if(connect()) {
+
+        //        if(connect()) {
+                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+                    notificationService.putExtra("username", username);
+                    startService(notificationService);
 
                     Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
                     intent.putExtra("username", username);//?
                     startActivity(intent);
-                }
-                else{  //?? when input wrong user data
-                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
-                            Toast.LENGTH_SHORT).show();
-                }
+      //          }
+//                else{  //?? when input wrong user data
+//                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
+//                            Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -93,10 +97,10 @@ public class MainActivity extends Activity {
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command,username,password);
+            /*    DefaultSocketClient socketClient = new DefaultSocketClient(command,username,password);
                 socketClient.run();
 
-                return socketClient.getResult();//??
+                return socketClient.getResult();//??*/
 
             //返回一个Boolean就行了
 
@@ -104,7 +108,7 @@ public class MainActivity extends Activity {
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-  //              return false;
+               return false;
             }
 
 //            @Override
@@ -116,7 +120,7 @@ public class MainActivity extends Activity {
 //            }
         };
         read.execute();
-        return false;
+        return true;
     }
 
 

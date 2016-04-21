@@ -8,6 +8,13 @@ import java.io.OutputStreamWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * @author  Wenlu Zhang
+ * @AndrewID: wenluz
+ * April 13, 2016
+ *
+ *
+ */
 
 public class AutoException extends Exception {
 	

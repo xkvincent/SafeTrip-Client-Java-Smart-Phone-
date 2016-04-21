@@ -16,17 +16,27 @@ import com.crimekiller.safetrip.R;
 public class AdminUserPagerFragment extends Fragment {
 
     public static final String USER_NAME = "USER_NAME";
+    public static final String USER = "USER";
 
     private User user;
     private TextView usernameTextView;
+    private TextView emailTextView;
 
-    public static AdminUserPagerFragment newInstance(String name ) {
+//    public static AdminUserPagerFragment newInstance(String name ) {
+//        Bundle args = new Bundle();
+//        args.putSerializable( USER_NAME, name );
+//
+//        AdminUserPagerFragment fragment = new AdminUserPagerFragment();
+//        fragment.setArguments(args);
+//
+//        return fragment;
+//    }
+    public static AdminUserPagerFragment newInstance(User user ) {
         Bundle args = new Bundle();
-        args.putSerializable( USER_NAME, name );
+        args.putSerializable(USER, user);
 
         AdminUserPagerFragment fragment = new AdminUserPagerFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -34,8 +44,9 @@ public class AdminUserPagerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String name = (String) getArguments().getSerializable( USER_NAME );
-        user = User.getUserByName(name);
+//        String name = (String) getArguments().getSerializable( USER_NAME );
+//        user = User.getUserByName(name);
+        user = (User) getArguments().getSerializable( USER );
     }
 
     @Override
@@ -43,9 +54,10 @@ public class AdminUserPagerFragment extends Fragment {
     {
         View v = inflater.inflate(R.layout.ui_admin_user_pager_fragment, container, false);
         usernameTextView = (TextView) v.findViewById(R.id.usernameTextView);
+        emailTextView = (TextView) v.findViewById(R.id.emailTextView);
 
         usernameTextView.setText( user.getName() );
-
+        emailTextView.setText( user.getEmail() );
         return v;
     }
 }

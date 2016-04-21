@@ -105,18 +105,18 @@ public class SignUpActivity extends Activity{
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(
-                        command,username,email,password);
-                socketClient.run();
-
-                return socketClient.getResult();
+//                DefaultSocketClient socketClient = new DefaultSocketClient(
+//                        command,username,email,password);
+//                socketClient.run();
+//
+//                return socketClient.getResult();
             //返回一个Boolean就行了
 
 
 //                userList = socketClient.getUserList();
 //                publishProgress(userList);
 
-//                return null;
+               return false;
             }
 
 //            @Override

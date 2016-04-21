@@ -5,46 +5,46 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.IBinder;
 
 import com.crimekiller.safetrip.R;
+import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.ui.MainActivity;
+import com.crimekiller.safetrip.ui.PendingRequestActivity;
 import com.crimekiller.safetrip.ui.UserPageActivity;
+
+import java.util.ArrayList;
 
 public class NotificationService extends Service {
 
     private NotificationManager notificationMgr;
     private Notification notification;
+    private String username;
+    private ArrayList<String> PendingRequest;
+
+    private static String GET_PENDING_REQUEST_COMMAND = "Get Pending Request";
+
     @Override
     public void onCreate() {
         super.onCreate();
         notificationMgr =(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        displayNotificationMessage();
-//        Thread thr = new Thread(null, new ServiceWorker(), "BackgroundService");
-//        thr.start();
-    }
 
-    class ServiceWorker implements Runnable
-    {
-        public void run() {
-            // do background processing here...
-            // stop the service when done...
-            // BackgroundService.this.stopSelf();
-        }
+        PendingRequest = new ArrayList<String>();
     }
 
     @Override
     public void onDestroy()
     {
-        //displayNotificationMessage();
         super.onDestroy();
     }
 
     @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        username = intent.getStringExtra("username");
+        connect();
+        return super.onStartCommand(intent, flags, startId);
     }
-
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -53,23 +53,41 @@ public class NotificationService extends Service {
         return null;
     }
 
-    private void displayNotificationMessage()
-    {
+    public void connect() {
 
-        PendingIntent pit = PendingIntent.getActivity(this, 0,
-                                                            new Intent(this, MainActivity.class), 0);
+        AsyncTask<Void, ArrayList<String>, Void> checkPendingRequest =
+                                                    new AsyncTask<Void, ArrayList<String>, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                DefaultSocketClient socketClient = new DefaultSocketClient(
+                        GET_PENDING_REQUEST_COMMAND, username, null);
+                socketClient.run();
+                PendingRequest = socketClient.getPendingRequest();
+
+                if( PendingRequest.size() != 0 )
+                    displayNotificationMessage(username);
+                return null;
+            }
+        };
+        checkPendingRequest.execute();
+    }
+
+    private void displayNotificationMessage(String name)
+    {
+        Intent pendingRequestIntent = new Intent(this, PendingRequestActivity.class );
+        pendingRequestIntent.putExtra("username",name);
+        PendingIntent pit = PendingIntent.getActivity(this, 0, pendingRequestIntent,
+                                                                PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder mBuilder = new Notification.Builder(this);
-        mBuilder.setContentTitle("Notification")                        //标题
-                .setContentText("Please go to Manage Friend Section")      //内容
-                .setSubText("Click on view pending request")     //内容下面的一小段文字
-                .setTicker("You have pending friend request")   //收到信息后状态栏显示的文字信息
-                .setWhen(System.currentTimeMillis())           //设置通知时间
-                .setSmallIcon(R.drawable.profile)            //设置小图标
-                //.setLargeIcon(LargeBitmap)                     //设置大图标
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
-                //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.biaobiao))  //设置自定义的提示音
-                .setAutoCancel(true);                          //设置点击后取消Notification
-               // .setContentIntent(pit);                        //设置PendingIntent
+        mBuilder.setContentTitle("Notification")                        //Title
+                .setContentText("Please go to Manage Friend Section")   //Content
+                .setSubText("Click on view pending request")            //SubContent
+                .setTicker("You have pending friend request")
+                .setWhen(System.currentTimeMillis())                   //Set time
+                .setSmallIcon(R.drawable.profile)                      //Set Icon
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)//set light and vibration
+                .setAutoCancel(true)                          //Click on to cancel notification
+                .setContentIntent(pit);                       //Pending Intent
         notification = mBuilder.build();
         notificationMgr.notify(1, notification);
     }

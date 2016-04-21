@@ -64,7 +64,12 @@
         <service
             android:name=".ws.remote.SocketService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.DetailedPendingRequest"
+            android:label="@string/title_activity_detailed_pending_request"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

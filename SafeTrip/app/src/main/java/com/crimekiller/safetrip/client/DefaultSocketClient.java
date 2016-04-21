@@ -21,20 +21,27 @@ import java.util.ArrayList;
 public class DefaultSocketClient extends Thread
 								implements SocketClientInterface{
 
-	public final String LocalHost = "10.0.2.2";
-	public final int PORT = 4000;
+
 	private ObjectInputStream objInputStream = null;
 	private ObjectOutputStream objOutputStream = null;
 
 	private Socket socket;
 	private String command;
+	private String username;
+    private String requestname;
 	private ArrayList<User> friendsList;
     private ArrayList<User> userList;
+    private ArrayList<String> pendingRequest;
+    private ArrayList<String> requestList;
 
-	public DefaultSocketClient(String command){
+	public DefaultSocketClient(String command, String username, String requestname){
+		this. username =  username;
 		this.command = command;
+        this.requestname = requestname;
 		this.friendsList = new ArrayList<User>();
         this.userList = new ArrayList<User>();
+        this.pendingRequest = new ArrayList<String>();
+        this.requestList = new ArrayList<String>();
 	}
 	public void run(){
 		if(openConnection()){
@@ -61,26 +68,63 @@ public class DefaultSocketClient extends Thread
 
 		try {
 			objOutputStream.writeObject(command);
+            objOutputStream.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// Get response from server
 		try {
-            if(command.equals("Manage Friend")){
+            if(command.equals(GET_FRIEND_LIST_COMMAND)){
+
+				objOutputStream.writeObject(username);
+
 			    friendsList = (ArrayList<User>) objInputStream.readObject();
-			    System.out.println(" Server Response: " + friendsList.size());
-            }else if(command.equals("Administrate User")){
+				userList = (ArrayList<User>) objInputStream.readObject();
+                pendingRequest = (ArrayList<String>) objInputStream.readObject();
+                requestList = (ArrayList<String>) objInputStream.readObject();
+			    System.out.println(" Server Response: " + userList.size());
+
+            }else if(command.equals(GET_USER_LIST_COMMAND)){
+
                 userList = (ArrayList<User>) objInputStream.readObject();
                 System.out.println(" Server Response: " + userList.size());
-            }
 
+            }else if(command.equals(SEND_FRIEND_REQUEST_COMMAND)){
+                // In this case the username = the name of the user to send friend Request to
+                objOutputStream.writeObject( username );
+                objOutputStream.flush();
+                objOutputStream.writeObject(requestname);
+                objOutputStream.flush();
+                pendingRequest = (ArrayList<String>) objInputStream.readObject();
+
+            }else if(command.equals(GET_PENDING_REQUEST_COMMAND)){
+
+                objOutputStream.writeObject(username);
+                pendingRequest = (ArrayList<String>) objInputStream.readObject();
+
+            }else if( command.equals(ACCEPT_PENDING_REQUEST_COMMAND)){
+
+                objOutputStream.writeObject(username);
+                objOutputStream.flush();
+                objOutputStream.writeObject(requestname);
+                objOutputStream.flush();
+                System.out.println("Accept pending request");
+
+            }else if( command.equals(DECLINE_PENDING_REQUEST_COMMAND)){
+
+                objOutputStream.writeObject(username);
+                objOutputStream.flush();
+                objOutputStream.writeObject(requestname);
+                objOutputStream.flush();
+            } else {
+                System.out.println("Command Can Not be Found");
+            }
 
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("ClassNotFoundException ");
 			e.printStackTrace();
 		}
-
 	}
 
 	public void closeConnection(){
@@ -98,7 +142,15 @@ public class DefaultSocketClient extends Thread
         return userList;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<User> getFriendsList() {
         return friendsList;
+    }
+
+    public ArrayList<String> getPendingRequest() {
+        return pendingRequest;
+    }
+
+    public ArrayList<String> getRequestList() {
+        return requestList;
     }
 }

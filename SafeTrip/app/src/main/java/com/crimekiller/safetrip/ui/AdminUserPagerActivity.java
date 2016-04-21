@@ -17,7 +17,10 @@ import java.util.ArrayList;
  * Created by Wenlu on 3/27/16.
  */
 public class AdminUserPagerActivity extends FragmentActivity {
+
     ViewPager mViewPager;
+    public static ArrayList<User> users;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,6 @@ public class AdminUserPagerActivity extends FragmentActivity {
         mViewPager = new ViewPager(this);
         mViewPager.setId(R.id.viewPager);
         setContentView(mViewPager);
-
-        final ArrayList<User> users = User.getUser();
 
         FragmentManager fm = getSupportFragmentManager();
 
@@ -38,14 +39,23 @@ public class AdminUserPagerActivity extends FragmentActivity {
 
             @Override
             public Fragment getItem(int pos) {
-                String userName = users.get(pos).getName();
-                return AdminUserPagerFragment.newInstance(userName);
+                //String userName = users.get(pos).getName();
+                // return AdminUserPagerFragment.newInstance(userName);
+                User userSelected = users.get(pos);
+                return AdminUserPagerFragment.newInstance(userSelected);
             }
         });
 
-        String name= (String) getIntent().getSerializableExtra(AdminUserPagerFragment.USER_NAME);
+//        String name= (String) getIntent().getSerializableExtra(AdminUserPagerFragment.USER_NAME);
+//        for (int i = 0; i < users.size(); i++) {
+//            if (users.get(i).getName().equals(name)) {
+//                mViewPager.setCurrentItem(i);
+//                break;
+//            }
+//        }
+        String username = (String) getIntent().getSerializableExtra(AdminUserPagerFragment.USER_NAME);
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getName().equals(name)) {
+            if (users.get(i).getName().equals(username) ) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

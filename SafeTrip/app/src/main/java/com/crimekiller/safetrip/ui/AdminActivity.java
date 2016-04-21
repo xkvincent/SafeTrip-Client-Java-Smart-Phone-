@@ -15,75 +15,60 @@ import android.widget.TextView;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * @author  Wenlu Zhang
+ * @AndrewID: wenluz
+ * April 13, 2016
+ *
+ *
+ */
 public class AdminActivity extends ListActivity {
 
     private SearchView searchUserView;
     private ListView userListView;
     private ArrayList<User> userList;
-    private Socket socket;
+    private String username;
 
-    public final String LocalHost = "10.0.2.2";
-    public final int PORT = 4000;
-    private ObjectInputStream objInputStream = null;
-    private ObjectOutputStream objOutputStream = null;
-    private String command = "Administrate User";
+    private static String GET_USER_LIST_COMMAND = "Get User List";
 
     @Override
-    public void onCreate (Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
 
-        searchUserView = (SearchView) findViewById(R.id.searchUserView);
-        searchUserView.setQueryHint("SearchUser");
+        Intent intent = getIntent();//  get the username from former activity
+        username = intent.getStringExtra("username");
+
+        userList = new ArrayList<User>();
 
         connect();
+        searchUserView = (SearchView) findViewById(R.id.searchUserView);
+        searchUserView.setQueryHint("SearchUser");
+        searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
-    public void connect(){
+    public void connect() {
 
-        AsyncTask<Void,ArrayList<User>,Void> read = new AsyncTask<Void, ArrayList<User>, Void>() {
+        AsyncTask<Void, ArrayList<User>, Void> read = new AsyncTask<Void, ArrayList<User>, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                DefaultSocketClient socketClient = new DefaultSocketClient(GET_USER_LIST_COMMAND,
+                        username, null);
                 socketClient.run();
                 userList = socketClient.getUserList();
                 publishProgress(userList);
-//                try {
-//                    socket = new Socket(LocalHost, PORT);
-//                    objInputStream = new ObjectInputStream(socket.getInputStream());
-//                    objOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//
-//                    objOutputStream.writeObject("Administrate User");
-//
-//                    // Get response from server
-//
-//                    try {
-//                        userList = (ArrayList<User>) objInputStream.readObject();
-//                        System.out.println(" Server Response: " + userList.size());
-//
-//                        objOutputStream.close();
-//                        objInputStream.close();
-//                        socket.close();
-//
-//                    } catch (IOException | ClassNotFoundException e) {
-//                        System.out.println("ClassNotFoundException ");
-//                        e.printStackTrace();
-//                    }
-//
-//
-//
-//                } catch (UnknownHostException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
                 return null;
             }
 
@@ -101,7 +86,7 @@ public class AdminActivity extends ListActivity {
     private class UserAdapter extends ArrayAdapter<User> {
 
         public UserAdapter(ArrayList<User> users) {
-            super(AdminActivity.this,android.R.layout.simple_list_item_1, users);
+            super(AdminActivity.this, android.R.layout.simple_list_item_1, users);
         }
 
         @Override
@@ -112,23 +97,25 @@ public class AdminActivity extends ListActivity {
             }
             User user = getItem(position);
             TextView userListTextView = (TextView) convertView.findViewById(R.id.UserListTextView);
-            userListTextView.setText( user.getName() );
+            userListTextView.setText(user.getName());
 
             return convertView;
         }
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id){
+    public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         // get user from the adapter
         // User user =  ((UserListViewAdapter) getListAdapter()).getItem(position) ;
-        User user = (User)getListView().getItemAtPosition(position);
-        Intent i = new Intent( AdminActivity.this, AdminUserPagerActivity.class);
-
-        i.putExtra( AdminUserPagerFragment.USER_NAME, user.getName());
+        User user = (User) getListView().getItemAtPosition(position);
+        Intent i = new Intent(AdminActivity.this, AdminUserPagerActivity.class);
+        //Static method to pass parameters among activities
+        AdminUserPagerActivity.users = userList;
+        //Using intent to pass parameters among activities
+        i.putExtra(AdminUserPagerFragment.USER_NAME, user.getName());
         startActivityForResult(i, 0);
     }
-
-
 }
+
+

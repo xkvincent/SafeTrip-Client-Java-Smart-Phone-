@@ -26,33 +26,34 @@ import java.util.ArrayList;
 
     }
 
-    public static ArrayList<User> getUser(){
-        users = new ArrayList<User>();
-        User a = new User("UserA","123","123");
-        User b = new User("UserB","124","124");
-        User c = new User("UserC","125","125");
+//    public static ArrayList<User> getUser(){
+//        users = new ArrayList<User>();
+//        User a = new User("UserA","123","123");
+//        User b = new User("UserB","124","124");
+//        User c = new User("UserC","125","125");
+//
+//        users.add(a);
+//        users.add(b);
+//        users.add(c);
+//
+//        return users;
+//    }
 
-        users.add(a);
-        users.add(b);
-        users.add(c);
-
-        return users;
-    }
-
-    public static ArrayList<User> getFriends(){
-        friends = new ArrayList<User>();
-        User a = new User("FriendA","211","211");
-        User b = new User("FriendB","212","212");
-
-        friends.add(a);
-        friends.add(b);
-
-        return friends;
-    }
+//    public static ArrayList<User> getFriends(){
+//        friends = new ArrayList<User>();
+//        User a = new User("FriendA","211","211");
+//        User b = new User("FriendB","212","212");
+//
+//        friends.add(a);
+//        friends.add(b);
+//
+//        return friends;
+//    }
 
     public String getName() {
         return name;
     }
+
     public String getPassword()
     {
         return password;

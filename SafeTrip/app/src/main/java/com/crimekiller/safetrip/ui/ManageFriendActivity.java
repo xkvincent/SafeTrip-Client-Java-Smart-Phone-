@@ -1,6 +1,8 @@
 package com.crimekiller.safetrip.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,46 +10,123 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
-
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class ManageFriendActivity extends Activity {
+
+
     private SearchView searchFriendsView;
     private Button viewPendingRequestsBtn;
+    private TextView userName;
     private ListView friendsListView;
-    private ArrayList<User> friendList;
-    private Socket socket;
 
-   // public final String LocalHost = "10.0.2.2";
-    public final String LocalHost = "10.0.2.2";
-    public final int PORT = 4000;
-    private ObjectInputStream objInputStream = null;
-    private ObjectOutputStream objOutputStream = null;
-    private String command = "Manage Friend";
+    private ArrayList<User> friendList;
+    private ArrayList<User> userList;
+    private ArrayList<String> pendingList;
+    private ArrayList<String> requestList;
+
+    private String username;
+
+    private static String GET_FRIEND_LIST_COMMAND = "Get Friend List";
+    private static String SEND_FRIEND_REQUEST_COMMAND = "Send Friend Request" ;
+
+    //custom defined String
+    private final static String ALREADY_FRIEND = "Already Friend";
+    private final static String PENDING_REQUEST = "Pending Friend";
+    private final static String ALREADY_REQUEST = "Already Send Request";
+    private final static String ALLOW_REQUEST = "Allow Request";
+    private final static String USER_NOT_FOUND = "User Can Not Be Found";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_manage_friend_activity);
+
+        Intent intent = getIntent();//  get the username from former activity
+        username = intent.getStringExtra("username");
+
+        userName = (TextView) findViewById(R.id.username);
+        userName.setText(username);
+
         friendList = new ArrayList<User>();
+        userList = new ArrayList<User>();
+        pendingList = new ArrayList<String>();
+        requestList = new ArrayList<String>();
+
         connect();
 
         searchFriendsView=(SearchView) findViewById(R.id.searchFriendsView);
-        searchFriendsView.setQueryHint("SearchView");
+        searchFriendsView.setQueryHint("Search User");
+        searchFriendsView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String queryUserName) {
+                final String queryName = queryUserName;
+                String res = findUser(queryUserName);
+                switch ( res ) {
+                    case ALREADY_FRIEND:
+                        new AlertDialog.Builder(ManageFriendActivity.this)
+                                .setTitle("FriendRequest：")
+                                .setMessage(" You Are Already Friends !")
+                                .setNegativeButton("OK", null)
+                                .show();
+                        break;
+                    case PENDING_REQUEST:
+                        new AlertDialog.Builder(ManageFriendActivity.this)
+                                .setTitle("FriendRequest：")
+                                .setMessage("Already In Your Pending Request ! ")
+                                .setNegativeButton("OK", null)
+                                .show();
+                        break;
+                    case ALREADY_REQUEST:
+                        new AlertDialog.Builder(ManageFriendActivity.this)
+                                .setTitle("FriendRequest：")
+                                .setMessage("You have sent this Request before ! ")
+                                .setNegativeButton("OK", null)
+                                .show();
+                        break;
+                    case USER_NOT_FOUND:
+                        new AlertDialog.Builder(ManageFriendActivity.this)
+                            .setTitle(" FriendRequest:  ")
+                            .setMessage(USER_NOT_FOUND)
+                            .setPositiveButton("OK", null)
+                            .show();
+                        break;
+                    case ALLOW_REQUEST:
+                        new AlertDialog.Builder(ManageFriendActivity.this)
+                            .setTitle("FriendRequest：")
+                            .setMessage("Send Friend Request? ")
+                            .setNegativeButton("Cancel", null)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(ManageFriendActivity.this,
+                                            "Request Has Been Sent", Toast.LENGTH_SHORT).show();
+                                    sendFriendRequest(queryName);
+                                }
+
+                            }).show();
+                        break;
+                    default:
+                        break;
+                }
+                searchFriendsView.setIconified(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         viewPendingRequestsBtn = (Button) findViewById(R.id.ViewPendingRequestsBtn);
         viewPendingRequestsBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,9 +134,43 @@ public class ManageFriendActivity extends Activity {
             public void onClick(View v) {
                 Intent pendingRequest = new Intent(ManageFriendActivity.this,
                         PendingRequestActivity.class);
+                pendingRequest.putExtra("username", username);//
                 startActivity(pendingRequest);
             }
         });
+    }
+
+    private String findUser(String queryUserName) {
+        if( pendingList.contains(queryUserName)){
+            return PENDING_REQUEST;
+        }
+        if( requestList.contains(queryUserName)) {
+            return ALREADY_REQUEST;
+        }
+        for( User friend:friendList){
+            if( friend.getName().equals(queryUserName))
+                return ALREADY_FRIEND;
+        }
+        for( User user: userList){
+            if(user.getName().equals(queryUserName))
+                return ALLOW_REQUEST;
+        }
+            return USER_NOT_FOUND;
+    }
+
+
+    private void sendFriendRequest( String queryUserName) {
+        final String requestname = queryUserName;
+        AsyncTask<Void,ArrayList<User>,Void> sendRequest = new AsyncTask<Void, ArrayList<User>, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                DefaultSocketClient socketClient = new DefaultSocketClient(SEND_FRIEND_REQUEST_COMMAND,
+                                                                        username, requestname);
+                socketClient.run();
+                return null;
+            }
+        };
+        sendRequest.execute();
     }
 
     private class FriendListAdapter extends ArrayAdapter<User> {
@@ -87,39 +200,14 @@ public class ManageFriendActivity extends Activity {
             AsyncTask<Void,ArrayList<User>,Void> read = new AsyncTask<Void, ArrayList<User>, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
-                    DefaultSocketClient socketClient = new DefaultSocketClient(command);
+                    DefaultSocketClient socketClient = new DefaultSocketClient(
+                                                        GET_FRIEND_LIST_COMMAND,username, null);
                     socketClient.run();
-                    friendList = socketClient.getFriends();
-                    publishProgress(friendList);
-//                    try {
-//                        socket = new Socket(LocalHost, PORT);
-//                        objInputStream = new ObjectInputStream(socket.getInputStream());
-//                        objOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//
-//                        objOutputStream.writeObject("Manage Friend");
-//
-//                        // Get response from server
-//
-//                        try {
-//                            friendsList = (ArrayList<User>) objInputStream.readObject();
-//                            System.out.println(" Server Response: " + friendsList.size());
-//
-//                            objOutputStream.close();
-//                            objInputStream.close();
-//                            socket.close();
-//
-//                        } catch (IOException | ClassNotFoundException e) {
-//                            System.out.println("ClassNotFoundException ");
-//                            e.printStackTrace();
-//                        }
-//
-//                        publishProgress(friendsList);
-//
-//                    } catch (UnknownHostException e) {
-//                        e.printStackTrace();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+                    friendList = socketClient.getFriendsList();
+                    userList = socketClient.getUserList();
+                    pendingList = socketClient.getPendingRequest();
+                    requestList = socketClient.getRequestList();
+                    publishProgress(friendList,userList);
                     return null;
                 }
 

@@ -4,11 +4,11 @@
 package com.crimekiller.safetrip.exception;
 
 /**
- * @author  Wenlu Zhang 
+ * @author  Wenlu Zhang
  * @AndrewID: wenluz
- * Feb 7, 2016
+ * April 13, 2016
  *
- * 
+ *
  */
 public class ExceptionHandler {
 	
