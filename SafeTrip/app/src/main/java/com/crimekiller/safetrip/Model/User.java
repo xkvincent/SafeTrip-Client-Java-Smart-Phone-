@@ -1,4 +1,4 @@
-package com.crimekiller.safetrip.model;
+package com.crimekiller.safetrip.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +19,9 @@ import java.util.ArrayList;
     private static ArrayList<User> users;
     private static ArrayList<User> friends;
 
+    public User(){
+
+    }
     public User(String name,String password, String email){
         this.name = name;
         this.password = password;
@@ -49,6 +52,16 @@ import java.util.ArrayList;
 //
 //        return friends;
 //    }
+
+    public void setName(String username){
+        name = username;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
 
     public String getName() {
         return name;
