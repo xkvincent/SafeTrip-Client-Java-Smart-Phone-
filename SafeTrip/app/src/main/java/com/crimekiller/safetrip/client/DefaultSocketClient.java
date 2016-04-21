@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class DefaultSocketClient extends Thread
 								implements SocketClientInterface{
 
-
 	private ObjectInputStream objInputStream = null;
 	private ObjectOutputStream objOutputStream = null;
 
@@ -43,6 +42,31 @@ public class DefaultSocketClient extends Thread
         this.pendingRequest = new ArrayList<String>();
         this.requestList = new ArrayList<String>();
 	}
+
+//    private String username;//??
+//    private String password;//??
+//    private Boolean result;//??
+//    private String oldPassword;
+//    private String newPassword;
+
+//	public DefaultSocketClient(String command, String username, String password){ //???
+//		this.command = command;
+//		this.username = username;
+//		this.password = password;
+//		this.friendsList = new ArrayList<User>();
+//		this.userList = new ArrayList<User>();
+//	}
+
+//	public DefaultSocketClient(String command,String username,
+//								   String oldPassword, String newPassword){	//???
+//		this.command = command;
+//		this.username = username;
+//		this.oldPassword = oldPassword; //!!在signup中看成email
+//		this.newPassword = newPassword;	//!!在signup中看成password
+////		this.friendsList = new ArrayList<User>();
+////		this.userList = new ArrayList<User>();
+//	}
+
 	public void run(){
 		if(openConnection()){
 			handleSession();
@@ -66,7 +90,7 @@ public class DefaultSocketClient extends Thread
 	
 	public void handleSession(){
 
-		try {
+        try {
 			objOutputStream.writeObject(command);
             objOutputStream.flush();
 		} catch (IOException e) {
@@ -88,7 +112,22 @@ public class DefaultSocketClient extends Thread
             }else if(command.equals(GET_USER_LIST_COMMAND)){
 
                 userList = (ArrayList<User>) objInputStream.readObject();
-                System.out.println(" Server Response: " + userList.size());
+
+//            }else if(command.equals("Login")){	//??
+//				String data = username + ";" + password;
+//				objOutputStream.writeObject(data);//不知道这一步对不对??
+//				result = (Boolean)objInputStream.readObject();
+//				String receive = (String)objInputStream.readObject();
+//				String buf[] = receive.split(",");
+				//username = (String)objInputStream.readObject();
+				//password = (String)objInputStream.readObject();
+//				username = buf[0];
+//				password = buf[1];
+//				System.out.println(" Username: " + username + "; Password:" + password);
+
+//			}else if( command.equals("MyProfile") ){
+
+//			}
 
             }else if(command.equals(SEND_FRIEND_REQUEST_COMMAND)){
                 // In this case the username = the name of the user to send friend Request to
@@ -153,4 +192,17 @@ public class DefaultSocketClient extends Thread
     public ArrayList<String> getRequestList() {
         return requestList;
     }
+
+//	public String getUsername(){//??
+//		return username;
+//	}
+//
+//	public String getPassword(){//??
+//		return password;
+//	}
+
+//	public Boolean getResult(){//??
+//		return result;
+//	}
+
 }
