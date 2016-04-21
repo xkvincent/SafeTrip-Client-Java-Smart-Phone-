@@ -3,6 +3,8 @@
  */
 package com.crimekiller.safetrip.client;
 
+import android.util.Log;
+
 import com.crimekiller.safetrip.model.User;
 
 import java.io.IOException;
@@ -26,46 +28,38 @@ public class DefaultSocketClient extends Thread
 
 	private Socket socket;
 	private String command;
-	private String username;
+	//private String username;
     private String requestname;
 	private ArrayList<User> friendsList;
     private ArrayList<User> userList;
     private ArrayList<String> pendingRequest;
     private ArrayList<String> requestList;
 
+	private String username;
+	private String password;
+	private Boolean result;
+	private String email;
+
+
 	public DefaultSocketClient(String command, String username, String requestname){
 		this. username =  username;
 		this.command = command;
         this.requestname = requestname;
+		password = requestname;
 		this.friendsList = new ArrayList<User>();
         this.userList = new ArrayList<User>();
         this.pendingRequest = new ArrayList<String>();
         this.requestList = new ArrayList<String>();
 	}
 
-//    private String username;//??
-//    private String password;//??
-//    private Boolean result;//??
-//    private String oldPassword;
-//    private String newPassword;
 
-//	public DefaultSocketClient(String command, String username, String password){ //???
-//		this.command = command;
-//		this.username = username;
-//		this.password = password;
-//		this.friendsList = new ArrayList<User>();
-//		this.userList = new ArrayList<User>();
-//	}
-
-//	public DefaultSocketClient(String command,String username,
-//								   String oldPassword, String newPassword){	//???
-//		this.command = command;
-//		this.username = username;
-//		this.oldPassword = oldPassword; //!!在signup中看成email
-//		this.newPassword = newPassword;	//!!在signup中看成password
-////		this.friendsList = new ArrayList<User>();
-////		this.userList = new ArrayList<User>();
-//	}
+	public DefaultSocketClient(String command,String username,
+							   String email, String password) {
+		this.command = command;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 
 	public void run(){
 		if(openConnection()){
@@ -113,22 +107,6 @@ public class DefaultSocketClient extends Thread
 
                 userList = (ArrayList<User>) objInputStream.readObject();
 
-//            }else if(command.equals("Login")){	//??
-//				String data = username + ";" + password;
-//				objOutputStream.writeObject(data);//不知道这一步对不对??
-//				result = (Boolean)objInputStream.readObject();
-//				String receive = (String)objInputStream.readObject();
-//				String buf[] = receive.split(",");
-				//username = (String)objInputStream.readObject();
-				//password = (String)objInputStream.readObject();
-//				username = buf[0];
-//				password = buf[1];
-//				System.out.println(" Username: " + username + "; Password:" + password);
-
-//			}else if( command.equals("MyProfile") ){
-
-//			}
-
             }else if(command.equals(SEND_FRIEND_REQUEST_COMMAND)){
                 // In this case the username = the name of the user to send friend Request to
                 objOutputStream.writeObject( username );
@@ -156,7 +134,44 @@ public class DefaultSocketClient extends Thread
                 objOutputStream.flush();
                 objOutputStream.writeObject(requestname);
                 objOutputStream.flush();
-            } else {
+
+            }else if(command.equals("Login")) {
+				String data = username;
+				objOutputStream.writeObject(data);
+				objOutputStream.flush();
+				User user = (User) objInputStream.readObject();
+				if (user != null) {
+					if (user.getPassword().equals(password)) {//if right password
+						result = true;
+					} else {
+						result = false;
+					}
+				} else {// input unexit username
+					result = false;
+				}
+			}else if( command.equals("EditPassword") ){
+				User user = new User();
+				user.setName(username);
+				user.setPassword(password);
+				objOutputStream.writeObject(user);
+				objOutputStream.flush();
+
+			}else if(command.equals("SignUp")){//put a user into DB,and return boolean
+
+				objOutputStream.writeObject(username);
+				objOutputStream.flush();
+				result = (Boolean)objInputStream.readObject();
+				Log.d("get result", result.toString());
+				if(result) {//success
+					User user = new User();
+					user.setName(username);
+					user.setPassword(password);
+					user.setEmail(email);
+					objOutputStream.writeObject(user);
+					objOutputStream.flush();
+
+				}
+			} else {
                 System.out.println("Command Can Not be Found");
             }
 
@@ -193,16 +208,16 @@ public class DefaultSocketClient extends Thread
         return requestList;
     }
 
-//	public String getUsername(){//??
-//		return username;
-//	}
-//
-//	public String getPassword(){//??
+	public String getUsername(){
+		return username;
+	}
+
+//	public String getPassword(){
 //		return password;
 //	}
 
-//	public Boolean getResult(){//??
-//		return result;
-//	}
+	public Boolean getResult(){
+		return result;
+	}
 
 }

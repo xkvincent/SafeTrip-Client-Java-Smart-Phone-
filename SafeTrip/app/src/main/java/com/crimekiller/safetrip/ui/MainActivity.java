@@ -24,103 +24,111 @@ public class MainActivity extends Activity {
 
     private Button loginButton;
     private Button signupButton;
-    private EditText editText1;  //?
+    private EditText editText1;
     private EditText editText2;
-    private String username;//?this is the username need to be passed to all of the activities
+    private String username;
     private String password;
 
-    private Socket socket;
-    public final String LocalHost = "10.0.2.2";
-    public final int PORT = 4000;
-    private ObjectInputStream objInputStream = null;
-    private ObjectOutputStream objOutputStream = null;
-    private String command = "Login";
+    private static String LOG_IN_COMMAND = "Login";
+    //private String command = "Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_main_activity);
 
-        editText1 = (EditText) findViewById(R.id.logIn_text1);//??
-        editText2 = (EditText)findViewById(R.id.logIn_text2);//??
+        editText1 = (EditText) findViewById(R.id.logIn_text1);
+        editText2 = (EditText)findViewById(R.id.logIn_text2);
 
         loginButton = (Button) findViewById(R.id.logIn_login);
         signupButton = (Button) findViewById(R.id.logIn_signUp);
-//        loginButton.setOnClickListener(this);
-//        loginButton.setOnClickListener(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//to 2
+            public void onClick(View v) {
 
 
-                username = editText1.getText().toString();//?
-                password = editText2.getText().toString();//??
-                Log.d("MianActivity", username);//?
-                Log.d("MianActivity", password);//??
+                username = editText1.getText().toString();
+                password = editText2.getText().toString();
+                Log.d("MianActivity", username);
+                Log.d("MianActivity", password);
 
 
         //        if(connect()) {
-                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
-                    notificationService.putExtra("username", username);
-                    startService(notificationService);
 
-                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-                    intent.putExtra("username", username);//?
-                    startActivity(intent);
+
+//                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+//                    notificationService.putExtra("username", username);
+//                    startService(notificationService);
+
+//                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+//                    intent.putExtra("username", username);//?
+//                    startActivity(intent);
       //          }
 //                else{  //?? when input wrong user data
 //                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
 //                            Toast.LENGTH_SHORT).show();
 //                }
+
+                connect();
             }
         });
 
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//to 3
-                username = editText1.getText().toString();//?
-                Log.d("MianActivity", username);//?
+            public void onClick(View v) {
+                username = editText1.getText().toString();
+                Log.d("MianActivity", username);
 
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                intent.putExtra("username", username);//?
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
 
     }
 
-
-    public Boolean connect(){//when input right username and password, return truth
+    public void connect(){
 
         AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-            /*    DefaultSocketClient socketClient = new DefaultSocketClient(command,username,password);
+
+                DefaultSocketClient socketClient = new DefaultSocketClient(
+                        LOG_IN_COMMAND,username,password);
                 socketClient.run();
 
-                return socketClient.getResult();//??*/
+                Boolean result = socketClient.getResult();
+                Log.d("ceshi",result.toString());
 
-            //返回一个Boolean就行了
+                return result;
 
-
-//                userList = socketClient.getUserList();
-//                publishProgress(userList);
-
-               return false;
             }
 
-//            @Override
-//            protected void onProgressUpdate(ArrayList<User>... values) {
-//
-//                UserAdapter adapter = new UserAdapter(userList);
-//                setListAdapter(adapter);
-//                super.onProgressUpdate(values);
-//            }
+            @Override
+            protected void onPostExecute(Boolean result) {
+                Log.d("onpost","jinru");
+                if(result) {
+
+                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    bundle.putString("password", password);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else {
+                    Log.d("jinru", "toast");
+                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
         };
         read.execute();
-        return true;
+
     }
 
 
