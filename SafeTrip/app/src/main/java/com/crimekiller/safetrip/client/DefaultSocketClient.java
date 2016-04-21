@@ -171,6 +171,17 @@ public class DefaultSocketClient extends Thread
 					objOutputStream.flush();
 
 				}
+//			}else if(command.equals("Admin")){
+//
+//				User admin = new User();
+//				admin.setName(username);
+//				admin.setPassword(password);
+//				objOutputStream.writeObject(admin);
+//				objOutputStream.flush();
+//
+//				result = (Boolean)objInputStream.readObject();
+//				Log.d("get result", result.toString());
+
 			} else {
                 System.out.println("Command Can Not be Found");
             }

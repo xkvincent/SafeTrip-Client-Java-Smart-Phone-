@@ -57,9 +57,7 @@ public class MainActivity extends Activity {
         //        if(connect()) {
 
 
-//                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
-//                    notificationService.putExtra("username", username);
-//                    startService(notificationService);
+
 
 //                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
 //                    intent.putExtra("username", username);//?
@@ -110,6 +108,10 @@ public class MainActivity extends Activity {
             protected void onPostExecute(Boolean result) {
                 Log.d("onpost","jinru");
                 if(result) {
+
+                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+                    notificationService.putExtra("username", username);
+                    startService(notificationService);
 
                     Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
                     Bundle bundle = new Bundle();
