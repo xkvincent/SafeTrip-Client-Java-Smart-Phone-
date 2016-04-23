@@ -71,7 +71,13 @@ public class ViewAllPostActivity extends AppCompatActivity {
 
                             // Get response from server
                             try {
-                                postList = (ArrayList<Post>)objInputStream.readObject();
+                                //postList = (ArrayList<Post>)objInputStream.readObject();
+                                ArrayList<Post> sortedPostList = new ArrayList<Post>();
+                                sortedPostList = (ArrayList<Post>)objInputStream.readObject();
+                                for (int i=sortedPostList.size()-1;i>=0;i--) {
+                                    postList.add(sortedPostList.get(i));
+
+                                }
                                 System.out.println(" Server Response: " + postList.size());
 
                                 objOutputStream.close();
