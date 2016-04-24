@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/LogOutItem"
+        android:alphabeticShortcut="e"
+        android:orderInCategory="1"
+        android:title="@string/menuitem_log_out"
+        android:titleCondensed="@string/menuitem_log_out"/>
+
+    <item
+        android:id="@+id/MainPageItem"
+        android:alphabeticShortcut="d"
+        android:orderInCategory="2"
+        android:title="@string/menuitem_main_page"
+        android:titleCondensed="@string/menuitem_main_page"/>
+</menu>
+
