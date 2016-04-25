@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
+import com.crimekiller.safetrip.exception.ExceptionHandler;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 public class AdminActivity extends ListActivity {
 
     private SearchView searchUserView;
-    private ListView userListView;
+   // private ListView userListView;
     private ArrayList<User> userList;
     private String username;
     private Bundle bundle;
@@ -56,6 +58,14 @@ public class AdminActivity extends ListActivity {
         searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if( !userList.contains(query) )
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.UserNotFound, AdminActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+
+                searchUserView.setIconified(true);
                 return false;
             }
 

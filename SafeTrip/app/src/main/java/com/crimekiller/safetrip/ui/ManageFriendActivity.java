@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 import java.util.ArrayList;
@@ -82,32 +83,37 @@ public class ManageFriendActivity extends AppCompatActivity {
                 String res = findUser(queryUserName);
                 switch ( res ) {
                     case ALREADY_FRIEND:
-                        new AlertDialog.Builder(ManageFriendActivity.this)
-                                .setTitle("FriendRequest：")
-                                .setMessage(" You Are Already Friends !")
-                                .setNegativeButton("OK", null)
-                                .show();
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.AlreadyFriend, ManageFriendActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
                         break;
                     case PENDING_REQUEST:
-                        new AlertDialog.Builder(ManageFriendActivity.this)
-                                .setTitle("FriendRequest：")
-                                .setMessage("Already In Your Pending Request ! ")
-                                .setNegativeButton("OK", null)
-                                .show();
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.PendingFriend, ManageFriendActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
                         break;
                     case ALREADY_REQUEST:
-                        new AlertDialog.Builder(ManageFriendActivity.this)
-                                .setTitle("FriendRequest：")
-                                .setMessage("You have sent this Request before ! ")
-                                .setNegativeButton("OK", null)
-                                .show();
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.AlreadyRequest, ManageFriendActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
                         break;
                     case USER_NOT_FOUND:
-                        new AlertDialog.Builder(ManageFriendActivity.this)
-                            .setTitle(" FriendRequest:  ")
-                            .setMessage(USER_NOT_FOUND)
-                            .setPositiveButton("OK", null)
-                            .show();
+//                        new AlertDialog.Builder(ManageFriendActivity.this)
+//                            .setTitle(" FriendRequest:  ")
+//                            .setMessage(USER_NOT_FOUND)
+//                            .setPositiveButton("OK", null)
+//                            .show();
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.UserNotFound, ManageFriendActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
                         break;
                     case ALLOW_REQUEST:
                         new AlertDialog.Builder(ManageFriendActivity.this)

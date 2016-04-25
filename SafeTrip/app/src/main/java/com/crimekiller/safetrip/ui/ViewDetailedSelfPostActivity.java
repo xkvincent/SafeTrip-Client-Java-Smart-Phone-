@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.crimekiller.safetrip.R;
-import com.crimekiller.safetrip.DBLayout.DBConnector;
+import com.crimekiller.safetrip.dblayout.DBConnector;
 import com.crimekiller.safetrip.model.Post;
 
 import java.io.IOException;

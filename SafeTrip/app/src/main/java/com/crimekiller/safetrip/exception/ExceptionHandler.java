@@ -3,6 +3,9 @@
  */
 package com.crimekiller.safetrip.exception;
 
+import android.app.AlertDialog;
+import android.content.Context;
+
 /**
  * @author  Wenlu Zhang
  * @AndrewID: wenluz
@@ -11,40 +14,39 @@ package com.crimekiller.safetrip.exception;
  *
  */
 public class ExceptionHandler {
-	
-	public String fixPriceMissing(){
-		return String.valueOf(0);
-	}
-	
-	public String fixInvalidBasePrice() {
-		return String.valueOf(18000);
-	}
-	
-	public String fixOptionSetMissing(){
-		String ErrorMessage =" Missing Option Set";
-		System.out.println(ErrorMessage);
-		return ErrorMessage;
-	}
-	
-	public String fixOptionMissing(){
-		String ErrorMessage =" Missing Option";
-		System.out.println(ErrorMessage);
-		return ErrorMessage;
-	}
-	
-	public void fixFileError() {
-		// TODO Auto-generated method stub
-		String ErrorMessage =" FileCanNotFound";
-		System.exit(0);
+
+
+	public void fixUserNotFound(Context mContext) {
+
+		new AlertDialog.Builder(mContext)
+				.setTitle("UserSearch：")
+				.setMessage(" User cannot be found in the system !")
+				.setNegativeButton("OK", null)
+				.show();
 	}
 
-	public void fixEditChoiceMissing() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void fixAlreadyFriend(Context mContext) {
 
-	public void fixOptionSetNameNotFound() {
-		// TODO Auto-generated method stub
-		System.out.println("OptionSetName has not been found");
-	}	
+        new AlertDialog.Builder(mContext)
+                .setTitle("FriendRequest：")
+                .setMessage(" You Are Already Friends !")
+                .setNegativeButton("OK", null)
+                .show();
+    }
+
+    public void fixPendingFriend(Context mContext) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("FriendRequest：")
+                .setMessage("Already In Your Pending Request ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
+
+    public void fixAlreadyRequest(Context mContext) {
+        new AlertDialog.Builder( mContext )
+                .setTitle("FriendRequest：")
+                .setMessage("You have sent this Request before ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
 }
