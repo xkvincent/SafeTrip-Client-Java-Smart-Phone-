@@ -40,7 +40,7 @@ public class ViewSelfPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_view_self_post_activity);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.ViewDetailedSelfPost_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ViewSelfPost_toolbar);
         setSupportActionBar(toolbar);
 
         selfPostListView = (ListView) findViewById(R.id.ViewSelfPost_SelfPostList);
