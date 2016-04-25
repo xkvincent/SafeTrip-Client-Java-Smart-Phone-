@@ -5,14 +5,13 @@ package com.crimekiller.safetrip.client;
 
 import android.util.Log;
 
-import com.crimekiller.safetrip.model.User;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-
+import com.crimekiller.safetrip.model.User;
 /**
  * @author  Wenlu Zhang 
  * @AndrewID: wenluz
@@ -28,16 +27,16 @@ public class DefaultSocketClient extends Thread
 
 	private Socket socket;
 	private String command;
-	//private String username;
+	private String username;
     private String requestname;
 	private ArrayList<User> friendsList;
     private ArrayList<User> userList;
     private ArrayList<String> pendingRequest;
     private ArrayList<String> requestList;
+	private User user;
 
-	private String username;
-	private String password;
-	private Boolean result;
+    private String password;
+    private Boolean result;
 	private String email;
 
 
@@ -45,7 +44,8 @@ public class DefaultSocketClient extends Thread
 		this. username =  username;
 		this.command = command;
         this.requestname = requestname;
-		password = requestname;
+        password = requestname;
+		this.user = new User();
 		this.friendsList = new ArrayList<User>();
         this.userList = new ArrayList<User>();
         this.pendingRequest = new ArrayList<String>();
@@ -135,20 +135,22 @@ public class DefaultSocketClient extends Thread
                 objOutputStream.writeObject(requestname);
                 objOutputStream.flush();
 
-            }else if(command.equals("Login")) {
-				String data = username;
-				objOutputStream.writeObject(data);
-				objOutputStream.flush();
-				User user = (User) objInputStream.readObject();
-				if (user != null) {
-					if (user.getPassword().equals(password)) {//if right password
-						result = true;
-					} else {
-						result = false;
-					}
-				} else {// input unexit username
-					result = false;
-				}
+            }else if(command.equals(LOG_IN_COMMAND)) {
+
+                String data = username;
+                objOutputStream.writeObject(data);
+                objOutputStream.flush();
+                User user = (User) objInputStream.readObject();
+                if (user != null) {
+                    if (user.getPassword().equals(password)) {//if right password
+                        result = true;
+                    } else {
+                        result = false;
+                    }
+                } else {// input unexit username
+                    result = false;
+                }
+
 			}else if( command.equals("EditPassword") ){
 				User user = new User();
 				user.setName(username);
@@ -223,9 +225,7 @@ public class DefaultSocketClient extends Thread
 		return username;
 	}
 
-//	public String getPassword(){
-//		return password;
-//	}
+    public User getUser(){ return user; }
 
 	public Boolean getResult(){
 		return result;

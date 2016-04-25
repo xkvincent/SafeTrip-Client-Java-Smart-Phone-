@@ -76,5 +76,6 @@
     <string name="Decline">Decline</string>
     <string name="Email">Email</string>
     <string name="Add_New_Friend">Add New Friend</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

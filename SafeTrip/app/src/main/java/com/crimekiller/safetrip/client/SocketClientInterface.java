@@ -19,6 +19,7 @@ public interface SocketClientInterface {
     static String GET_PENDING_REQUEST_COMMAND = "Get Pending Request";
     static String ACCEPT_PENDING_REQUEST_COMMAND = "Accept Pending Request";
     static String DECLINE_PENDING_REQUEST_COMMAND = "Decline Pending Request";
+    static String LOG_IN_COMMAND = "Login";
     final String LocalHost = "10.0.2.2";
     final int PORT = 4000;
 

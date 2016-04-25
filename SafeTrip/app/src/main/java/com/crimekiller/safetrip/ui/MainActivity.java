@@ -15,9 +15,6 @@ import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -54,7 +51,7 @@ public class MainActivity extends Activity {
                 Log.d("MianActivity", password);
 
 
-        //        if(connect()) {
+                //        if(connect()) {
 
 
 
@@ -62,7 +59,7 @@ public class MainActivity extends Activity {
 //                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
 //                    intent.putExtra("username", username);//?
 //                    startActivity(intent);
-      //          }
+                //          }
 //                else{  //?? when input wrong user data
 //                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
 //                            Toast.LENGTH_SHORT).show();
@@ -135,3 +132,4 @@ public class MainActivity extends Activity {
 
 
 }
+
