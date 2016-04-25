@@ -88,7 +88,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Blankarea"
+            android:text=""
             android:id="@+id/ViewAllPost_Blank" />
 
     </LinearLayout>

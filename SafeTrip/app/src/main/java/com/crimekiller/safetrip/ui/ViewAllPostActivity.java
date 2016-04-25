@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.crimekiller.safetrip.R;
@@ -32,17 +35,21 @@ public class ViewAllPostActivity extends AppCompatActivity {
     private ArrayList<Post> postList = new ArrayList<Post>();
     private ListView AllPostListView;
     private String username;
+    private Bundle bundle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Intent intent = getIntent();//?  get the username from former activity
-        username = intent.getStringExtra("username");//?
+        bundle = intent.getExtras();
+        username = bundle.getString("username");
         Log.d("AllPostActivity", username);//?
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.ui_view_all_post_activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ViewAllPost_toolbar);
+        setSupportActionBar(toolbar);
 
         AllPostListView = (ListView) findViewById(R.id.ViewAllPost_AllPostList);
         loadAllPostTask();
@@ -108,6 +115,41 @@ public class ViewAllPostActivity extends AppCompatActivity {
 
         // save the post to the database using a separate thread
         getAllPost.execute((Object[]) null);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(ViewAllPostActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(ViewAllPostActivity.this, UserPageActivity.class);
+                mainPage.putExtras(bundle);
+
+                startActivity(mainPage); // start the Activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 
 }

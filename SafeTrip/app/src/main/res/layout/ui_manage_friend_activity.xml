@@ -1,85 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/fab_margin">
-    <LinearLayout
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-         <TextView
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/ManageFriend_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2C3646"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/fab_margin">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/Hello"
+                android:layout_weight="1"
+                android:textColor="#2C3646"
+                android:textStyle="bold"
+                android:gravity="right"
+                style="@style/TitleTextView"/>
+            <TextView
+                android:id="@+id/username"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColor="#2C3646"
+                android:textStyle="bold"
+                android:gravity="left"
+                style="@style/TitleTextView"/>
+        </LinearLayout>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/Hello"
-            android:layout_weight="1"
+            android:text="@string/Manage_Friends"
+            android:layout_gravity="center"
             android:textColor="#2C3646"
             android:textStyle="bold"
-            android:gravity="right"
             style="@style/TitleTextView"/>
-        <TextView
-            android:id="@+id/username"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textColor="#2C3646"
-            android:textStyle="bold"
-            android:gravity="left"
-            style="@style/TitleTextView"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Manage_Friends"
-        android:layout_gravity="center"
-        android:textColor="#2C3646"
-        android:textStyle="bold"
-        style="@style/TitleTextView"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textColor="#2C3646"
+                android:textStyle="bold"
+                android:text="@string/Add_New_Friend"/>
+            <SearchView
+                android:id="@+id/searchFriendsView"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true">
+            </SearchView>
 
-        <TextView
-            android:layout_width="wrap_content"
+
+
+        </LinearLayout>
+        <ListView
+            android:id="@+id/friendslistview"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:divider="#00000000"
+            style="@style/RoundConnerTextView">
+        </ListView>
+        <Button
+            android:id="@+id/ViewPendingRequestsBtn"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:gravity="center"
-            android:textColor="#2C3646"
+            android:layout_gravity="center"
+            android:text="@string/View_Pending_Requests"
+            android:textAllCaps="false"
             android:textStyle="bold"
-            android:text="@string/Add_New_Friend"/>
-        <SearchView
-            android:id="@+id/searchFriendsView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true">
-        </SearchView>
-
-
-
+            android:background="@drawable/round"
+            android:textColor="#CBD1DC" />
     </LinearLayout>
-    <ListView
-        android:id="@+id/friendslistview"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:divider="#00000000"
-        style="@style/RoundConnerTextView">
-    </ListView>
-    <Button
-        android:id="@+id/ViewPendingRequestsBtn"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="@string/View_Pending_Requests"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:background="@drawable/round"
-        android:textColor="#CBD1DC" />
-</LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+

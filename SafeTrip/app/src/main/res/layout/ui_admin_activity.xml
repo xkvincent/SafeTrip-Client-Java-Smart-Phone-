@@ -1,45 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/fab_margin">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Administrate_Users"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:textColor="#2C3646"
-        android:textStyle="bold"
-        style="@style/TitleTextView"/>
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/Admin_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2C3646"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="@dimen/fab_margin">
-
-        <SearchView
-            android:id="@+id/searchUserView"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_height="50dp"
-            android:layout_weight="1">
-        </SearchView>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="ok"
+            android:layout_height="wrap_content"
+            android:text="@string/Administrate_Users"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:textColor="#2C3646"
             android:textStyle="bold"
-            android:background="@drawable/round"
-            android:textColor="#CBD1DC"
-            android:gravity="center"
-            android:layout_gravity="center" />
+            style="@style/TitleTextView"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:padding="@dimen/fab_margin">
+
+            <SearchView
+                android:id="@+id/searchUserView"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="50dp"
+                android:layout_weight="1">
+            </SearchView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="ok"
+                android:textStyle="bold"
+                android:background="@drawable/round"
+                android:textColor="#CBD1DC"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
@@ -48,4 +69,9 @@
             android:divider="#00000000">
         </ListView>
 
-</LinearLayout>
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+

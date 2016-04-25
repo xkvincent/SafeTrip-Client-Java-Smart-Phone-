@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +24,7 @@ import java.net.Socket;
 /**
  * Created by xuvincent on 16/4/2.
  */
-public class SignUpActivity extends Activity{
+public class SignUpActivity extends AppCompatActivity {
 
     private Button signupButton;
     private EditText editText1;
@@ -40,6 +44,9 @@ public class SignUpActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_signup_activity);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.SignUp_toolbar);
+        setSupportActionBar(toolbar);
 
         editText1 = (EditText)findViewById(R.id.signUp_username);
         editText2 = (EditText)findViewById(R.id.signUp_email);
@@ -118,6 +125,34 @@ public class SignUpActivity extends Activity{
         read.execute();
         Log.d("defalut","false");
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(SignUpActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 
 }

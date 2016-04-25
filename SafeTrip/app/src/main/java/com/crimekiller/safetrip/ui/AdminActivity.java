@@ -4,6 +4,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -30,6 +34,7 @@ public class AdminActivity extends ListActivity {
     private ListView userListView;
     private ArrayList<User> userList;
     private String username;
+    private Bundle bundle;
 
     private static String GET_USER_LIST_COMMAND = "Get User List";
 
@@ -38,8 +43,10 @@ public class AdminActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
 
+
         Intent intent = getIntent();//  get the username from former activity
-        username = intent.getStringExtra("username");
+        bundle = intent.getExtras();
+        username = bundle.getString("username");
 
         userList = new ArrayList<User>();
 
@@ -116,6 +123,43 @@ public class AdminActivity extends ListActivity {
         i.putExtra(AdminUserPagerFragment.USER_NAME, user.getName());
         startActivityForResult(i, 0);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(AdminActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(AdminActivity.this, UserPageActivity.class);
+                mainPage.putExtras(bundle);
+
+                startActivity(mainPage); // start the Activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
+    }
+
+
 }
 
 

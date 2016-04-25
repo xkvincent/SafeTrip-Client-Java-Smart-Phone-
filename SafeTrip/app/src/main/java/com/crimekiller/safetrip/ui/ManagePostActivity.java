@@ -3,6 +3,7 @@ package com.crimekiller.safetrip.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,15 +17,20 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
     private Button newPost,allPost, selfPost;
     private Intent i;
     private String username;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_manage_post_activity);
 
-        Intent intent = getIntent();//?  get the username from former activity
-        username = intent.getStringExtra("username");//?
-        Log.d("ManagePostActivity", username);//?
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ManagePost_toolbar);
+        setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();//? get the username and password from former activity
+        bundle = intent.getExtras();
+        username = bundle.getString("username");
+        Log.d("ManagePostActivity", username);
 
         newPost  = (Button) findViewById(R.id.ManagePost_NewPost);
         allPost = (Button) findViewById(R.id.ManegePost_ViewAllPost);
@@ -37,8 +43,9 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_manage_post, menu);
+        getMenuInflater().inflate(R.menu.menu_items, menu);
         return true;
     }
 
@@ -47,14 +54,26 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(ManagePostActivity.this, MainActivity.class);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                startActivity(logOut); // start the Activity
+                return true;
 
-        return super.onOptionsItemSelected(item);
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(ManagePostActivity.this, UserPageActivity.class);
+                mainPage.putExtras(bundle);
+
+                startActivity(mainPage); // start the Activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 
 
@@ -79,7 +98,7 @@ public class ManagePostActivity extends AppCompatActivity implements View.OnClic
 
         }
         // start activity
-        i.putExtra("username", username);//?
+        i.putExtras(bundle);
         startActivity(i);
     }
 

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +33,8 @@ public class ViewDetailedSelfPostActivity extends AppCompatActivity {
     private Socket socket;
     private String command = "Delete Post";
     private String username;
+    private String password;
+    private Bundle bundle;
     private ArrayList<Post> postList;
 
     private TextView dateTV, licensePlateTV, destinationTV, modelTV, colorTV, departureTV;
@@ -42,6 +47,9 @@ public class ViewDetailedSelfPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_view_detailed_self_post_activity);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ViewDetailedSelfPost_toolbar);
+        setSupportActionBar(toolbar);
+
         Button deleteBtn = (Button) findViewById(R.id.DetailedSelfPost_Delete);
 
         dateTV = (TextView) findViewById(R.id.DetailedSelfPost_Date);
@@ -52,16 +60,18 @@ public class ViewDetailedSelfPostActivity extends AppCompatActivity {
         departureTV = (TextView) findViewById(R.id.DetailedSelfPost_Departure);
 
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        bundle = intent.getExtras();
+        username = bundle.getString("username");
+        password = bundle.getString("password");
         Log.d("ViewDetailedSelfPost", username);
 
-        String date = intent.getStringExtra("DATE");
-        String licensePlate = intent.getStringExtra("PLATE");
-        String destination = intent.getStringExtra("DESTINATION");
-        String model = intent.getStringExtra("MODEL");
-        String color = intent.getStringExtra("COLOR");
-        String departure = intent.getStringExtra("DEPARTURE");
-        String owner = intent.getStringExtra("OWNER");
+        String date = bundle.getString("DATE");
+        String licensePlate = bundle.getString("PLATE");
+        String destination = bundle.getString("DESTINATION");
+        String model = bundle.getString("MODEL");
+        String color = bundle.getString("COLOR");
+        String departure = bundle.getString("DEPARTURE");
+        String owner = bundle.getString("OWNER");
 
         dateTV.setText(date);
         licensePlateTV.setText(licensePlate);
@@ -129,7 +139,10 @@ public class ViewDetailedSelfPostActivity extends AppCompatActivity {
                             {
                                 //finish(); // return to the previous Activity
                                 Intent i = new Intent(ViewDetailedSelfPostActivity.this, ViewSelfPostActivity.class);
-                                i.putExtra("username", username);
+                                Bundle bundles = new Bundle();
+                                bundles.putString("username", username);
+                                bundles.putString("password", password);
+                                i.putExtras(bundles);
                                 startActivity(i);
                             } // end method onPostExecute
                         }; // end AsyncTask
@@ -149,6 +162,46 @@ public class ViewDetailedSelfPostActivity extends AppCompatActivity {
         // insert post into local database
         dbConnector.deleteRecord(post);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(ViewDetailedSelfPostActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(ViewDetailedSelfPostActivity.this, UserPageActivity.class);
+
+                Bundle bundles = new Bundle();
+                bundles.putString("username", username);
+                bundles.putString("password", password);
+                mainPage.putExtras(bundles);
+
+                startActivity(mainPage); // start the Activity
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 
 
