@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,11 +20,12 @@ import com.crimekiller.safetrip.client.DefaultSocketClient;
 
 import java.util.ArrayList;
 
-public class PendingRequestActivity extends Activity {
+public class PendingRequestActivity extends AppCompatActivity {
 
     private ArrayList<String> PendingRequest;
     private ListView requestListView;
     private String username;
+    private Bundle bundle;
     private static String GET_PENDING_REQUEST_COMMAND = "Get Pending Request";
 
     @Override
@@ -28,8 +33,12 @@ public class PendingRequestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_pending_requesta_activity);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.PendingRequest_toolbar);
+        setSupportActionBar(toolbar);
+
         Intent intent = getIntent();//  get the username from former activity
-        username = intent.getStringExtra("username");
+        bundle = intent.getExtras();
+        username = bundle.getString("username");
         PendingRequest = new ArrayList<String>();
         connect();
 
@@ -96,5 +105,40 @@ public class PendingRequestActivity extends Activity {
             }
         };
         read.execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(PendingRequestActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(PendingRequestActivity.this, UserPageActivity.class);
+                mainPage.putExtras(bundle);
+
+                startActivity(mainPage); // start the Activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 }

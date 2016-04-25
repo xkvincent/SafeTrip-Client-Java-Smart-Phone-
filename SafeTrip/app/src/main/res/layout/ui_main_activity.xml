@@ -85,7 +85,7 @@
 
         <Button
             android:id="@+id/logIn_login"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/Login"
             android:textStyle="bold"
@@ -93,11 +93,12 @@
             android:textColor="#CBD1DC"
             android:gravity="center"
             android:padding="14dp"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/logIn_signUp"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/Signup"
             android:textStyle="bold"
@@ -105,7 +106,8 @@
             android:textColor="#CBD1DC"
             android:gravity="center"
             android:padding="14dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"/>
 
 
 

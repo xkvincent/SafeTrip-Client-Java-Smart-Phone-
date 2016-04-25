@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.IBinder;
 
 import com.crimekiller.safetrip.R;
@@ -21,6 +22,7 @@ public class NotificationService extends Service {
     private NotificationManager notificationMgr;
     private Notification notification;
     private String username;
+    private Bundle bundle;
     private ArrayList<String> PendingRequest;
 
     private static String GET_PENDING_REQUEST_COMMAND = "Get Pending Request";
@@ -41,7 +43,9 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        username = intent.getStringExtra("username");
+      bundle = intent.getExtras();
+      username = bundle.getString("username");
+       // username = intent.getStringExtra("username");
         connect();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -75,7 +79,8 @@ public class NotificationService extends Service {
     private void displayNotificationMessage(String name)
     {
         Intent pendingRequestIntent = new Intent(this, PendingRequestActivity.class );
-        pendingRequestIntent.putExtra("username",name);
+        //pendingRequestIntent.putExtra("username",name);
+        pendingRequestIntent.putExtras(bundle);
         PendingIntent pit = PendingIntent.getActivity(this, 0, pendingRequestIntent,
                                                                 PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder mBuilder = new Notification.Builder(this);

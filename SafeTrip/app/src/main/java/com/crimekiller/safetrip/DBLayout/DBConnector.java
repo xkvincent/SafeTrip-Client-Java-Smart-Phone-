@@ -1,4 +1,4 @@
-package com.crimekiller.safetrip.DBLayout;
+package com.crimekiller.safetrip.dblayout;
 
 import android.content.ContentValues;
 import android.content.Context;

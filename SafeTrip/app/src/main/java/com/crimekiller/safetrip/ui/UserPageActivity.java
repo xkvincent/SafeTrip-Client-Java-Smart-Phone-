@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by xuvincent on 16/4/2.
  */
-public class UserPageActivity extends Activity{
+public class UserPageActivity extends AppCompatActivity {
 
     private Button profileBT;
     private Button postBT;
@@ -36,6 +40,9 @@ public class UserPageActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_userpage_activity);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Userpage_toolbar);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         bundle = intent.getExtras();
@@ -63,7 +70,8 @@ public class UserPageActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManagePostActivity.class);
-                intent.putExtra("username", username);
+                //intent.putExtra("username", username);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -71,7 +79,8 @@ public class UserPageActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManageFriendActivity.class);
-                intent.putExtra("username", username);
+                //intent.putExtra("username", username);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -82,7 +91,8 @@ public class UserPageActivity extends Activity{
 //                connect();
             if(username.equals("admin")) {
                 Intent intent = new Intent(UserPageActivity.this, AdminActivity.class);
-                intent.putExtra("username", username);
+                //intent.putExtra("username", username);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }else{
                 Log.d("jinru", "toast");
@@ -92,6 +102,35 @@ public class UserPageActivity extends Activity{
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.logout_LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(UserPageActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 
 
