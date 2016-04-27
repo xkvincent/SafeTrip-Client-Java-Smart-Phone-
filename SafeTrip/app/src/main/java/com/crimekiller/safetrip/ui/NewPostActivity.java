@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.crimekiller.safetrip.dblayout.DBConnector;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.Post;
 import com.crimekiller.safetrip.R;
 
@@ -139,25 +140,33 @@ public class NewPostActivity extends AppCompatActivity {
                         // save the post to the database using a separate thread
                         savePostTask.execute((Object[]) null);
 
-            } else
-            {
-                Toast.makeText(getApplicationContext(), testFlag, Toast.LENGTH_LONG).show();
+            } else {
+                
+                try {
+                    throw new AutoException(AutoException.ErrorInfo.MissingRequiredFields, NewPostActivity.this );
+                } catch (AutoException e) {
+                    //Do nothing, handler has been invoked in the AutoException fix()
+                }// end else
 
-            } // end else
+            }
+
         } // end method onClick
     }; // end OnClickListener saveButtonClicked
 
     private String testInput(){
 
+        String result;
+
         // test the post related information entered by user
         // if each input row is empty
         // it is illegal
-        if (licensePlateET.getText().toString().length() == 0 || destinationET.getText().toString().length() == 0 ){
-            return "Please fill all required fields.";
+        if (licensePlateET.getText().toString().length() == 0 ||destinationET.getText().toString().length() == 0 ){
+            result = "missing fields";
         } else {
-            return "true";
+            result = "true";
         }
 
+            return result;
 
     }
 

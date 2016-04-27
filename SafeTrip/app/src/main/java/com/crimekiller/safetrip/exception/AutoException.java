@@ -26,7 +26,8 @@ public class AutoException extends Exception {
 	private Context mContext;
 
 	public enum ErrorInfo{
-		UserNotFound(0), AlreadyFriend(1), PendingFriend(2), AlreadyRequest(3);
+		UserNotFound(0), AlreadyFriend(1), PendingFriend(2), AlreadyRequest(3),
+		MissingRequiredFields(4);
 
 		private int errno;
 		ErrorInfo( int errno){
@@ -78,13 +79,15 @@ public class AutoException extends Exception {
 				handler.fixUserNotFound(mContext);
 				break;
             case 1:
-                handler.fixAlreadyFriend(mContext);
+				handler.fixAlreadyFriend(mContext);
                 break;
             case 2:
-                handler.fixPendingFriend(mContext);
+				handler.fixPendingFriend(mContext);
                 break;
             case 3:
-                handler.fixAlreadyRequest(mContext);
+				handler.fixAlreadyRequest(mContext);
+			case 4:
+				handler.fixMissingRequiredFields(mContext);
 			default:
 				break;
 		}

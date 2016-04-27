@@ -49,4 +49,13 @@ public class ExceptionHandler {
                 .setNegativeButton("OK", null)
                 .show();
     }
+
+    public void fixMissingRequiredFields(Context mContext) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Fill all required fields: ")
+                .setMessage("Please enter the plate number and destination ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
+
 }

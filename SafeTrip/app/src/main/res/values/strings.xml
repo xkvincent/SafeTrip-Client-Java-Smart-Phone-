@@ -36,7 +36,7 @@
 
     <string name="Manage_Post_Label"> Manage Post</string>
     <string name="Manage_Post_NewPost"> New Post</string>
-    <string name="Manage_Post_ViewAllPost"> View All Post</string>
+    <string name="Manage_Post_ViewAllPost"> View Friends Post</string>
     <string name="Manage_Post_ViewSelfPost"> View Self Post</string>
 
     <string name="New_Post_Label"> New Post</string>
@@ -61,7 +61,7 @@
     <string name="Self_Post_Date"> Date</string>
     <string name="Self_Post_Destination"> Destination</string>
 
-    <string name="View_All_Post_AllPostLabel"> All Posts</string>
+    <string name="View_All_Post_AllPostLabel"> Friends Post</string>
     <string name="View_All_Post_Username"> Username</string>
     <string name="View_All_Post_Date"> Date</string>
     <string name="View_All_Post_Plate"> License Plate</string>
