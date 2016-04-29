@@ -5,7 +5,6 @@ package com.crimekiller.safetrip.exception;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.widget.Toast;
 
 /**
  * @author  Wenlu Zhang
@@ -50,47 +49,4 @@ public class ExceptionHandler {
                 .setNegativeButton("OK", null)
                 .show();
     }
-
-    public void fixWrongLogIn(Context mContext){//main
-        Toast.makeText(mContext, "Wrong Username or Password!",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixWrongAdmin(Context mContext){//userpage
-        Toast.makeText(mContext, "You Are Not an Admin!",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixNotSameNewPassword(Context mContext){//editPassword
-
-        Toast.makeText(mContext, "New password are not same! ",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixWrongOldPassword(Context mContext){//editPassword
-
-        Toast.makeText(mContext, "Input Wrong Old Password!",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixDifferentPassword(Context mContext){//signUp
-        Toast.makeText(mContext, "Input Different Password! ",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixFailCreateUser(Context mContext){//signUp
-        Toast.makeText(mContext, "Fail to Create User!",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixInValidPassword(Context mContext){//signUp
-        Toast.makeText(mContext, "The length of password must between 6 and 12!",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void fixInValidEmail(Context mContext){//signUp
-        Toast.makeText(mContext, "Invalid Email Format! ",
-                Toast.LENGTH_SHORT).show();
-    }
-
 }
