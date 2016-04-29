@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 
 import java.io.ObjectInputStream;
@@ -80,8 +81,14 @@ public class EditPasswordActivity extends AppCompatActivity {
 
                 //if twice new password not same
                 if(!newPassword.equals(newPassword2)){
-                    Toast.makeText(EditPasswordActivity.this, "New password are not same! ",
-                            Toast.LENGTH_SHORT).show();
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.NotSameNewPassword,
+                                EditPasswordActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+//                    Toast.makeText(EditPasswordActivity.this, "New password are not same! ",
+//                            Toast.LENGTH_SHORT).show();
                 }
                 else {
 
@@ -93,9 +100,23 @@ public class EditPasswordActivity extends AppCompatActivity {
                                 MyProfileActivity.class);
                         intent2.putExtras(bundle);
                         startActivity(intent2);
+                    } else if(newPassword.length()>12||newPassword.length()<6){
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.InValidPassword,
+                                    EditPasswordActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
+
                     } else {// input wrong old password
-                        Toast.makeText(EditPasswordActivity.this, "Input Wrong Old Password!",
-                                Toast.LENGTH_SHORT).show();
+                        try {
+                            throw new AutoException(AutoException.ErrorInfo.WrongOldPassword,
+                                    EditPasswordActivity.this );
+                        } catch (AutoException e) {
+                            //Do nothing, handler has been invoked in the AutoException fix()
+                        }
+//                        Toast.makeText(EditPasswordActivity.this, "Input Wrong Old Password!",
+//                                Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -109,8 +130,8 @@ public class EditPasswordActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
 
-                DefaultSocketClient socketClient = new DefaultSocketClient(EDIT_PASSWORD_COMMAND, username,
-                        newPassword);
+                DefaultSocketClient socketClient = new DefaultSocketClient(EDIT_PASSWORD_COMMAND,
+                        username, newPassword);
                 socketClient.run();
 
                 return null;

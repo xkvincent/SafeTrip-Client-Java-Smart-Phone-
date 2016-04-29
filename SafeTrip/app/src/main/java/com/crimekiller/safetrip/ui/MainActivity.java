@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
@@ -88,7 +89,8 @@ public class MainActivity extends Activity {
 
     public void connect(){
 
-        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
+        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void,
+                ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
 
@@ -112,7 +114,8 @@ public class MainActivity extends Activity {
                 Log.d("onpost","jinru");
                 if(result) {
 
-                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+                    Intent notificationService = new Intent(MainActivity.this,
+                            NotificationService.class);
                     //notificationService.putExtra("username", username);
 
                     notificationService.putExtras(bundle);
@@ -126,9 +129,15 @@ public class MainActivity extends Activity {
                     startActivity(intent);
                 }
                 else {
-                    Log.d("jinru", "toast");
-                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
-                            Toast.LENGTH_SHORT).show();
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.WrongLogIn,
+                                MainActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+//                    Log.d("jinru", "toast");
+//                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
+//                            Toast.LENGTH_SHORT).show();
                 }
 
             }

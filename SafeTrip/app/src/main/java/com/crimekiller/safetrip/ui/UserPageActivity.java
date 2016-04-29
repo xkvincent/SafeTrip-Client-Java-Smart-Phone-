@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
@@ -96,8 +97,14 @@ public class UserPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }else{
                 Log.d("jinru", "toast");
-                Toast.makeText(UserPageActivity.this, "You Are Not an Admin!",
-                            Toast.LENGTH_SHORT).show();
+                try {
+                    throw new AutoException(AutoException.ErrorInfo.WrongAdmin,
+                            UserPageActivity.this );
+                } catch (AutoException e) {
+                    //Do nothing, handler has been invoked in the AutoException fix()
+                }
+//                Toast.makeText(UserPageActivity.this, "You Are Not an Admin!",
+//                            Toast.LENGTH_SHORT).show();
             }
             }
         });
@@ -136,7 +143,8 @@ public class UserPageActivity extends AppCompatActivity {
 
 //    public void connect(){
 //
-//        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
+//        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void,
+// ArrayList<User>, Boolean>() {
 //            @Override
 //            protected Boolean doInBackground(Void... params) {
 //
