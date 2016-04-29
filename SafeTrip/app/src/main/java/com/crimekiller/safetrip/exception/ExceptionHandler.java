@@ -93,4 +93,12 @@ public class ExceptionHandler {
                 Toast.LENGTH_SHORT).show();
     }
 
+    public void fixMissingRequiredFields(Context mContext) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Fill all required fields: ")
+                .setMessage("Please enter the plate number and destination ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
+
 }
