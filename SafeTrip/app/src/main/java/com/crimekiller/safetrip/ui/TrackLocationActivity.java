@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +14,6 @@ import android.widget.EditText;
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
-import com.crimekiller.safetrip.model.User;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,10 @@ public class TrackLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_track_location_activity);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.MyProfile_toolbar);
+        setSupportActionBar(toolbar);
+
         trackLocation = (Button) findViewById(R.id.trackLocation);
         trackFriendName = (EditText) findViewById(R.id.track_friend_name);
         locationList = new ArrayList<String>();
@@ -48,6 +54,25 @@ public class TrackLocationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 trackname = trackFriendName.getText().toString();
                 connect();
+            }
+        });
+    }
+
+    public void connect() {
+
+        AsyncTask<Void, ArrayList<String>, Void> task = new AsyncTask<Void, ArrayList<String>, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                DefaultSocketClient socketClient = new DefaultSocketClient(TRACK_FRIEND_LIST_COMMAND,
+                        username, trackname );
+                socketClient.run();
+                locationList = socketClient.getLocationList();
+                publishProgress(locationList);
+                return null;
+            }
+
+            @Override
+            protected void onProgressUpdate(ArrayList<String>... values) {
 
                 if( locationList !=null && locationList.size() !=0 ){
                     latitude = locationList.get(0);
@@ -63,7 +88,7 @@ public class TrackLocationActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 }
-               else{
+                else{
                     try {
                         throw new AutoException(AutoException.ErrorInfo.TrackError, TrackLocationActivity.this );
                     } catch (AutoException e) {
@@ -71,24 +96,45 @@ public class TrackLocationActivity extends AppCompatActivity {
                     }
                     // System.out.println("You can not track person who are not your friend");
                 }
-            }
-        });
-    }
-
-    public void connect() {
-
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                DefaultSocketClient socketClient = new DefaultSocketClient(TRACK_FRIEND_LIST_COMMAND,
-                        username, trackname );
-                socketClient.run();
-                locationList = socketClient.getLocationList();
-                //publishProgress(userList);
-                return null;
+                super.onProgressUpdate(values);
             }
 
         };
         task.execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) // switch based on selected MenuItem's ID
+        {
+            case R.id.LogOutItem:
+                // create an Intent to launch the AddEditContact Activity
+                Intent logOut =
+                        new Intent(TrackLocationActivity.this, MainActivity.class);
+
+                startActivity(logOut); // start the Activity
+                return true;
+
+            case R.id.MainPageItem:
+                Intent mainPage=
+                        new Intent(TrackLocationActivity.this, UserPageActivity.class);
+                mainPage.putExtras(bundle);
+
+                startActivity(mainPage); // start the Activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        } // end switch
     }
 }

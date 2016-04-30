@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
     private String password;
 
     private static String LOG_IN_COMMAND = "Login";
-    //private String command = "Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,6 @@ public class MainActivity extends Activity {
 
                 username = editText1.getText().toString();
                 password = editText2.getText().toString();
-                Log.d("MianActivity", username);
-                Log.d("MianActivity", password);
 
                 //connect();
                 Bundle bundle = new Bundle();
@@ -68,7 +65,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 username = editText1.getText().toString();
-                Log.d("MianActivity", username);
 
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 intent.putExtra("username", username);
@@ -80,7 +76,8 @@ public class MainActivity extends Activity {
 
     public void connect(){
 
-        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void, ArrayList<User>, Boolean>() {
+        AsyncTask<Void,ArrayList<User>,Boolean> read = new AsyncTask<Void,
+                ArrayList<User>, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
 
@@ -89,7 +86,6 @@ public class MainActivity extends Activity {
                 socketClient.run();
 
                 Boolean result = socketClient.getResult();
-                Log.d("ceshi",result.toString());
 
                 return result;
 
@@ -101,26 +97,27 @@ public class MainActivity extends Activity {
                 bundle.putString("username", username);
                 bundle.putString("password", password);
 
-                Log.d("onpost","jinru");
                 if(result) {
 
-                    Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+                    Intent notificationService = new Intent(MainActivity.this,
+                            NotificationService.class);
                     //notificationService.putExtra("username", username);
 
                     notificationService.putExtras(bundle);
                     startService(notificationService);
 
                     Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-                   /* Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);*/
+
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
                 else {
-                    Log.d("jinru", "toast");
-                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
-                            Toast.LENGTH_SHORT).show();
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.WrongLogIn,
+                                MainActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
                 }
 
             }

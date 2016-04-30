@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -71,8 +72,31 @@ public class SignUpActivity extends AppCompatActivity {
 
                 //when twice password not same
                 if(!password.equals(password2)){
-                    Toast.makeText(SignUpActivity.this, "Input Different Password! ",
-                            Toast.LENGTH_SHORT).show();
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.DifferentPassword,
+                                SignUpActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+//                    Toast.makeText(SignUpActivity.this, "Input Different Password! ",
+//                            Toast.LENGTH_SHORT).show();
+                }else if(password.length()>12||password.length()<6){
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.InValidPassword,
+                                SignUpActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+                }
+                else if(!email.contains("@")){
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.InValidEmail,
+                                SignUpActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+//                    Toast.makeText(SignUpActivity.this, "Invalid Email Format! ",
+//                            Toast.LENGTH_SHORT).show();
                 }
                 else {
 
@@ -115,8 +139,14 @@ public class SignUpActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else{
                     Log.d("result=",result.toString());
-                    Toast.makeText(SignUpActivity.this, "Fail to Create User!",
-                            Toast.LENGTH_SHORT).show();
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.FailCreateUser
+                                , SignUpActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+//                    Toast.makeText(SignUpActivity.this, "Fail to Create User!",
+//                            Toast.LENGTH_SHORT).show();
 
                 }
             }

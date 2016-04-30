@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
+import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.ws.local.NotificationService;
 
@@ -83,7 +84,7 @@ public class UserPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManagePostActivity.class);
-                //intent.putExtra("username", username);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -93,7 +94,7 @@ public class UserPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserPageActivity.this, ManageFriendActivity.class);
-                //intent.putExtra("username", username);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -103,16 +104,20 @@ public class UserPageActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                connect();
-            if(username.equals("admin")) {
-                Intent intent = new Intent(UserPageActivity.this, AdminActivity.class);
-                //intent.putExtra("username", username);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }else{
-                Log.d("jinru", "toast");
-                Toast.makeText(UserPageActivity.this, "You Are Not an Admin!",
-                            Toast.LENGTH_SHORT).show();
+                if (username.equals("admin")) {
+                    Intent intent = new Intent(UserPageActivity.this, AdminActivity.class);
+
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.WrongAdmin,
+                                UserPageActivity.this);
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+
                 }
             }
         });
@@ -217,7 +222,6 @@ public class UserPageActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         } // end switch
     }
-
 
     public void connect( final String longitude, final String latitude){
 

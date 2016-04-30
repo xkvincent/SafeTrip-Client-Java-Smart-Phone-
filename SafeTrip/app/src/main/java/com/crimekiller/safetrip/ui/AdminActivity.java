@@ -95,7 +95,7 @@ public class AdminActivity extends ListActivity {
             protected Void doInBackground(Void... params) {
                 DefaultSocketClient socketClient = new DefaultSocketClient(GET_USER_LIST_COMMAND,
                         username, null);
-                System.out.println("!!!!!!!Get User List!!!!!!!!!");
+
                 socketClient.run();
                 userList = socketClient.getUserList();
                 publishProgress(userList);

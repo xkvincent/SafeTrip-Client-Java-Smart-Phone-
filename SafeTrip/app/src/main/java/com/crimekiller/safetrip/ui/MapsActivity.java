@@ -3,6 +3,7 @@ package com.crimekiller.safetrip.ui;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.crimekiller.safetrip.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,6 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_maps_activity);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         Intent intent = getIntent();
         bundle = intent.getExtras();
         username = bundle.getString("username");
