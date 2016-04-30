@@ -54,9 +54,7 @@ public class ViewAllPostActivity extends AppCompatActivity {
         AllPostListView = (ListView) findViewById(R.id.ViewAllPost_AllPostList);
         loadAllPostTask();
 
-
     }
-
 
     public void loadAllPostTask()  {
         AsyncTask<Object, Object, Object> getAllPost =

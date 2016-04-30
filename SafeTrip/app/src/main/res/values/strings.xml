@@ -80,5 +80,11 @@
 
     <string name="menuitem_log_out">Log Out</string>
     <string name="menuitem_main_page">User Page</string>
+    <string name="Admin_View_All_Post">View All Post</string>
+    <string name="title_activity_admin_view_all_post">AdminViewAllPostActivity</string>
+    <string name="All_Post">All Posts</string>
+    <string name="ShareLocation">ShareLocation</string>
+    <string name="Track_Location">Track Location</string>
+    <string name="title_activity_track_location">TrackLocationActivity</string>
 
 </resources>

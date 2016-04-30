@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,22 +50,16 @@ public class MainActivity extends Activity {
                 Log.d("MianActivity", username);
                 Log.d("MianActivity", password);
 
-
-                //        if(connect()) {
-
-
-
-
-//                    Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-//                    intent.putExtra("username", username);//?
-//                    startActivity(intent);
-                //          }
-//                else{  //?? when input wrong user data
-//                    Toast.makeText(MainActivity.this, "Wrong Username or Password!",
-//                            Toast.LENGTH_SHORT).show();
-//                }
-
-                connect();
+                //connect();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", username);
+                bundle.putString("password", password);
+                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                   /* Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    bundle.putString("password", password);*/
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

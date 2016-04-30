@@ -27,7 +27,7 @@ public class AutoException extends Exception {
 
 	public enum ErrorInfo{
 		UserNotFound(0), AlreadyFriend(1), PendingFriend(2), AlreadyRequest(3),
-		MissingRequiredFields(4);
+		MissingRequiredFields(4), TrackError(13);
 
 		private int errno;
 		ErrorInfo( int errno){
@@ -86,8 +86,12 @@ public class AutoException extends Exception {
                 break;
             case 3:
 				handler.fixAlreadyRequest(mContext);
+				break;
 			case 4:
 				handler.fixMissingRequiredFields(mContext);
+				break;
+			case 13:
+				handler.fixTrackError(mContext);
 			default:
 				break;
 		}

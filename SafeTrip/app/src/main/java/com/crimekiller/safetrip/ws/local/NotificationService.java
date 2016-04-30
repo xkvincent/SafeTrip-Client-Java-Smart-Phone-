@@ -31,7 +31,6 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         notificationMgr =(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-
         PendingRequest = new ArrayList<String>();
     }
 
@@ -43,8 +42,8 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-      bundle = intent.getExtras();
-      username = bundle.getString("username");
+         bundle = intent.getExtras();
+         username = bundle.getString("username");
        // username = intent.getStringExtra("username");
         connect();
         return super.onStartCommand(intent, flags, startId);
@@ -65,6 +64,7 @@ public class NotificationService extends Service {
             protected Void doInBackground(Void... params) {
                 DefaultSocketClient socketClient = new DefaultSocketClient(
                         GET_PENDING_REQUEST_COMMAND, username, null);
+
                 socketClient.run();
                 PendingRequest = socketClient.getPendingRequest();
 

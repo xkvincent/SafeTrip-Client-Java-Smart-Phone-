@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -37,22 +38,23 @@ public class AdminActivity extends ListActivity {
     private ArrayList<User> userList;
     private String username;
     private Bundle bundle;
+    private Button viewAllPost;
 
     private static String GET_USER_LIST_COMMAND = "Get User List";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();//  get the username from former activity
+        bundle = intent.getExtras();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
 
-
-        Intent intent = getIntent();//  get the username from former activity
-        bundle = intent.getExtras();
         username = bundle.getString("username");
-
         userList = new ArrayList<User>();
 
         connect();
+
         searchUserView = (SearchView) findViewById(R.id.searchUserView);
         searchUserView.setQueryHint("SearchUser");
         searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -74,6 +76,16 @@ public class AdminActivity extends ListActivity {
                 return false;
             }
         });
+
+        viewAllPost = (Button) findViewById(R.id.Admin_ViewAllPost);
+        viewAllPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminActivity.this, AdminViewAllPostActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
     }
 
     public void connect() {
@@ -83,6 +95,7 @@ public class AdminActivity extends ListActivity {
             protected Void doInBackground(Void... params) {
                 DefaultSocketClient socketClient = new DefaultSocketClient(GET_USER_LIST_COMMAND,
                         username, null);
+                System.out.println("!!!!!!!Get User List!!!!!!!!!");
                 socketClient.run();
                 userList = socketClient.getUserList();
                 publishProgress(userList);
@@ -94,6 +107,7 @@ public class AdminActivity extends ListActivity {
 
                 UserAdapter adapter = new UserAdapter(userList);
                 setListAdapter(adapter);
+                System.out.println("On Progress Update");
                 super.onProgressUpdate(values);
             }
         };
