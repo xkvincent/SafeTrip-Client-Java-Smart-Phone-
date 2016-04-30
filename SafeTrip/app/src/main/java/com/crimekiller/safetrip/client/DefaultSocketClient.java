@@ -178,6 +178,7 @@ public class DefaultSocketClient extends Thread
                 objOutputStream.writeObject(locationlist);
                 objOutputStream.flush();
 
+                System.out.println("$$$$$$$$$$$$$ username " + username );
             }
             else if(command.equals(LOG_IN_COMMAND)) {
 

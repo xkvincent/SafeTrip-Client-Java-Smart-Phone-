@@ -47,16 +47,16 @@ public class MainActivity extends Activity {
                 username = editText1.getText().toString();
                 password = editText2.getText().toString();
 
-                //connect();
-                Bundle bundle = new Bundle();
-                bundle.putString("username", username);
-                bundle.putString("password", password);
-                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                connect();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("username", username);
+//                bundle.putString("password", password);
+//                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
                    /* Bundle bundle = new Bundle();
                     bundle.putString("username", username);
                     bundle.putString("password", password);*/
-                intent.putExtras(bundle);
-                startActivity(intent);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
             }
         });
 

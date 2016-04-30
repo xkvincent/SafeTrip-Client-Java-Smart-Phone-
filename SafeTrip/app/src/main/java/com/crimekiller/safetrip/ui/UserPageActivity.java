@@ -153,10 +153,13 @@ public class UserPageActivity extends AppCompatActivity {
         }
 
         lc = lm.getLastKnownLocation(lm.GPS_PROVIDER);
+        updateShow(lc);
+
         lm.requestLocationUpdates(lm.GPS_PROVIDER, 0, 0, new LocationListener() {
+
             @Override
             public void onLocationChanged(Location location) {
-                updateShow(location);
+               // updateShow(location);
             }
 
             @Override
