@@ -9,8 +9,11 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import com.crimekiller.safetrip.model.Post;
 import com.crimekiller.safetrip.model.User;
 /**
  * @author  Wenlu Zhang 
@@ -29,10 +32,13 @@ public class DefaultSocketClient extends Thread
 	private String command;
 	private String username;
     private String requestname;
+
 	private ArrayList<User> friendsList;
     private ArrayList<User> userList;
     private ArrayList<String> pendingRequest;
     private ArrayList<String> requestList;
+	private ArrayList<Post> postList;
+	private ArrayList<String> locationList;
 	private User user;
 
     private String password;
@@ -44,18 +50,24 @@ public class DefaultSocketClient extends Thread
 		this. username =  username;
 		this.command = command;
         this.requestname = requestname;
-        password = requestname;
+
 		this.user = new User();
 		this.friendsList = new ArrayList<User>();
         this.userList = new ArrayList<User>();
         this.pendingRequest = new ArrayList<String>();
         this.requestList = new ArrayList<String>();
+		this.postList = new ArrayList<Post>();
+		this.locationList = new ArrayList<String>();
+
+        password = requestname;
 	}
 
 
 	public DefaultSocketClient(String command,String username,
 							   String email, String password) {
-		this.command = command;
+		// Need Consideration
+        // When Sharing location, email = latitude, password = longtitude
+        this.command = command;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -135,7 +147,39 @@ public class DefaultSocketClient extends Thread
                 objOutputStream.writeObject(requestname);
                 objOutputStream.flush();
 
-            }else if(command.equals(LOG_IN_COMMAND)) {
+            }else if (command.equals(ADMIN_GET_ALLPOST_COMMAND)){
+
+                postList = (ArrayList<Post>)objInputStream.readObject();
+                objOutputStream.flush();
+                objOutputStream.writeObject(requestname);
+                objOutputStream.flush();
+
+                locationList = (ArrayList<String>) objInputStream.readObject();
+
+            }else if (command.equals(TRACK_FRIEND_LIST_COMMAND)){
+
+                objOutputStream.writeObject(username);
+                objOutputStream.flush();
+                objOutputStream.writeObject(requestname);
+                objOutputStream.flush();
+                locationList = (ArrayList<String>) objInputStream.readObject();
+
+            }else if( command.equals(SHARE_LOCATION)){
+                ArrayList<String >locationlist = new ArrayList<String>();
+                //When Sharing location, parameters reused
+                // email = longtitude
+                // password = latitude
+
+                locationlist.add(email);
+                locationlist.add(password);
+
+                objOutputStream.writeObject(username);
+                objOutputStream.flush();
+                objOutputStream.writeObject(locationlist);
+                objOutputStream.flush();
+
+            }
+            else if(command.equals(LOG_IN_COMMAND)) {
 
                 String data = username;
                 objOutputStream.writeObject(data);
@@ -173,18 +217,7 @@ public class DefaultSocketClient extends Thread
 					objOutputStream.flush();
 
 				}
-//			}else if(command.equals("Admin")){
-//
-//				User admin = new User();
-//				admin.setName(username);
-//				admin.setPassword(password);
-//				objOutputStream.writeObject(admin);
-//				objOutputStream.flush();
-//
-//				result = (Boolean)objInputStream.readObject();
-//				Log.d("get result", result.toString());
-
-			} else {
+			}else {
                 System.out.println("Command Can Not be Found");
             }
 
@@ -231,4 +264,9 @@ public class DefaultSocketClient extends Thread
 		return result;
 	}
 
+    public ArrayList<Post> getPostList() { return postList; }
+
+	public ArrayList<String> getLocationList() {
+		return locationList;
+	}
 }

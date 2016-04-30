@@ -26,9 +26,10 @@ public class AutoException extends Exception {
 	private Context mContext;
 
 	public enum ErrorInfo{
+
 		UserNotFound(0), AlreadyFriend(1), PendingFriend(2), AlreadyRequest(3),WrongLogIn(4),
 		WrongAdmin(5),NotSameNewPassword(6),WrongOldPassword(7), DifferentPassword(8),
-		FailCreateUser(9),InValidPassword(10),InValidEmail(11),MissingRequiredFields(12);
+		FailCreateUser(9),InValidPassword(10),InValidEmail(11),MissingRequiredFields(12),TrackError(13);
 
 		private int errno;
 		ErrorInfo( int errno){
@@ -86,7 +87,8 @@ public class AutoException extends Exception {
 				handler.fixPendingFriend(mContext);
                 break;
             case 3:
-                handler.fixAlreadyRequest(mContext);
+				handler.fixAlreadyRequest(mContext);
+				break;
 			case 4:
 				handler.fixWrongLogIn(mContext);
 				break;
@@ -113,6 +115,9 @@ public class AutoException extends Exception {
 				break;
 			case 12:
 				handler.fixMissingRequiredFields(mContext);
+				break;
+			case 13:
+				handler.fixTrackError(mContext);
 			default:
 				break;
 		}

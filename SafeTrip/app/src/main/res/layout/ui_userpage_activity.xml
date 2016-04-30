@@ -21,13 +21,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/userPage_user"
@@ -48,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
 
@@ -63,7 +59,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="14dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:id="@+id/userPage_post"
@@ -76,7 +72,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="14dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="15dp"/>
 
             <Button
                 android:id="@+id/userPage_friends"
@@ -89,9 +85,9 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="14dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="15dp"/>
 
-            <Button
+           <Button
                 android:id="@+id/userPage_admin"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
@@ -102,13 +98,34 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="14dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:id="@+id/userPage_location"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ShareLocation"
+                android:textStyle="bold"
+                android:background="@drawable/round"
+                android:textColor="#CBD1DC"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="14dp"
+                android:layout_marginTop="15dp"/>
 
-
+            <Button
+                android:id="@+id/userPage_track"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Track_Location"
+                android:textStyle="bold"
+                android:background="@drawable/round"
+                android:textColor="#CBD1DC"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="14dp"
+                android:layout_marginTop="15dp"/>
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

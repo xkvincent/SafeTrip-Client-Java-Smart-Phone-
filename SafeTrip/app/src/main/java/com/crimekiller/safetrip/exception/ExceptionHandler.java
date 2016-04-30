@@ -101,4 +101,11 @@ public class ExceptionHandler {
                 .show();
     }
 
+    public void fixTrackError(Context mContext) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Track Error: ")
+                .setMessage("You can not track people who are not your friends ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
 }
