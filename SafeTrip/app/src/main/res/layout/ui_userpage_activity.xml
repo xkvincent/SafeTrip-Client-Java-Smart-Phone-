@@ -26,17 +26,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/userPage_user"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="40dp"
-            android:text="@string/User"
-            android:textColor="#2C3646"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_marginTop="80dp"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="80dp">
+            <TextView
+                android:id="@+id/Welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Welcome ! "
+                android:layout_weight="1"
+                android:textSize="40dp"
+                android:textColor="#2C3646"
+                android:gravity="right"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/userPage_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
+                android:textColor="#2C3646"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
 
         <LinearLayout
@@ -44,9 +58,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
 
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/UserPage_AdminImageView"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/social1"
+                android:layout_marginTop="80dp"/>
 
             <Button
                 android:id="@+id/userPage_myProfile"
@@ -87,18 +110,7 @@
                 android:padding="14dp"
                 android:layout_marginTop="15dp"/>
 
-           <Button
-                android:id="@+id/userPage_admin"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Admin"
-                android:textStyle="bold"
-                android:background="@drawable/round"
-                android:textColor="#CBD1DC"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:padding="14dp"
-                android:layout_marginTop="15dp"/>
+
             <Button
                 android:id="@+id/userPage_location"
                 android:layout_width="180dp"
@@ -124,6 +136,20 @@
                 android:layout_gravity="center"
                 android:padding="14dp"
                 android:layout_marginTop="15dp"/>
+
+            <Button
+                android:id="@+id/userPage_admin"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Admin"
+                android:textStyle="bold"
+                android:background="@drawable/round"
+                android:textColor="#CBD1DC"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="14dp"
+                android:layout_marginTop="15dp"/>
+
         </LinearLayout>
 
     </LinearLayout>

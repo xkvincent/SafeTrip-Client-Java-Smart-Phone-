@@ -29,7 +29,8 @@ public class AutoException extends Exception {
 
 		UserNotFound(0), AlreadyFriend(1), PendingFriend(2), AlreadyRequest(3),WrongLogIn(4),
 		WrongAdmin(5),NotSameNewPassword(6),WrongOldPassword(7), DifferentPassword(8),
-		FailCreateUser(9),InValidPassword(10),InValidEmail(11),MissingRequiredFields(12),TrackError(13);
+		FailCreateUser(9),InValidPassword(10),InValidEmail(11),MissingRequiredFields(12),
+		TrackError(13), ShareLocationError(14);
 
 		private int errno;
 		ErrorInfo( int errno){
@@ -118,6 +119,9 @@ public class AutoException extends Exception {
 				break;
 			case 13:
 				handler.fixTrackError(mContext);
+				break;
+			case 14:
+				handler.fixShareLocationError(mContext);
 			default:
 				break;
 		}

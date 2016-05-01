@@ -84,7 +84,11 @@
     <string name="title_activity_admin_view_all_post">AdminViewAllPostActivity</string>
     <string name="All_Post">All Posts</string>
     <string name="ShareLocation">ShareLocation</string>
-    <string name="Track_Location">Track Location</string>
+    <string name="Track_Location">Track</string>
     <string name="title_activity_track_location">TrackLocationActivity</string>
+    <string name="TrackLocationInfo1">* SafeTrip Preserved Rights To Issue Indeeds Involves Crimes.</string>
+    <string name="TrackLocationInfo2">* You ONLY Have Rights To Track Locations Of Your Friends.</string>
+    <string name="TrackLocationInfo3">* You ONLY Have Rights To Track Your Friend Who Has
+                                        Agreed To Share His/Her Location.</string>
 
 </resources>

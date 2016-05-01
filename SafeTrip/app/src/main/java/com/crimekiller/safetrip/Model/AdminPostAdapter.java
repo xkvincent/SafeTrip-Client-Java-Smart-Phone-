@@ -26,12 +26,26 @@ public class AdminPostAdapter extends ArrayAdapter<Post> {
         Post post = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_admin_simple_post, parent, false);
+
+//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_admin_simple_post, parent, false);
+//        }
+//        // Lookup view for data population
+//        TextView tvUser = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_User);
+//        TextView tvDate = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_Date);
+//        TextView tvDestination = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_Destination);
+
+            convertView =
+                    LayoutInflater.from(getContext()).inflate(R.layout.item_admin_simple_post,
+                            parent, false);
         }
         // Lookup view for data population
-        TextView tvUser = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_User);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_Date);
-        TextView tvDestination = (TextView) convertView.findViewById(R.id.Admin_Simple_Post_Destination);
+        TextView tvUser = (TextView)
+                convertView.findViewById(R.id.Admin_Simple_Post_User);
+        TextView tvDate = (TextView)
+                convertView.findViewById(R.id.Admin_Simple_Post_Date);
+        TextView tvDestination = (TextView)
+                convertView.findViewById(R.id.Admin_Simple_Post_Destination);
+
         // Populate the data into the template view using the data object
         tvUser.setText(post.getOwner());
         tvDate.setText(post.getDate());
@@ -41,3 +55,4 @@ public class AdminPostAdapter extends ArrayAdapter<Post> {
     }
 
 }
+

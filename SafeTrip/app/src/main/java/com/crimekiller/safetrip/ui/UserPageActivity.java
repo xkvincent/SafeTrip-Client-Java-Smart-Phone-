@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,6 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
@@ -34,6 +39,9 @@ public class UserPageActivity extends AppCompatActivity {
     private Button adminBT;
     private Button locationBT;
     private Button trackBT;
+    private TextView userPage_user;
+    private TextView Welcome;
+    private ImageView adminImage;
 
     private String username;
     private String password;
@@ -47,6 +55,7 @@ public class UserPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_userpage_activity);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.Userpage_toolbar);
         setSupportActionBar(toolbar);
@@ -55,15 +64,38 @@ public class UserPageActivity extends AppCompatActivity {
         bundle = intent.getExtras();
         username = bundle.getString("username");
         password = bundle.getString("password");
-        Log.d("UserPageActivity", username);
-        Log.d("UserPageActivity", password);
+
+        userPage_user = (TextView) findViewById(R.id.userPage_user);
+        userPage_user.setText(username);
+        userPage_user.setTypeface(tf);
+
+        Welcome = (TextView) findViewById(R.id.Welcome);
+        Welcome.setTypeface(tf);
 
         profileBT = (Button)findViewById(R.id.userPage_myProfile);
+
         postBT = (Button)findViewById(R.id.userPage_post);
+
         friendsBT = (Button)findViewById(R.id.userPage_friends);
+
         adminBT = (Button) findViewById(R.id.userPage_admin);
+
         locationBT = (Button) findViewById(R.id.userPage_location);
+
         trackBT = (Button) findViewById(R.id.userPage_track);
+
+        adminImage = (ImageView) findViewById(R.id.UserPage_AdminImageView);
+
+        if (!username.equals("admin")) {
+            adminBT.setVisibility(View.GONE);
+            adminImage.setVisibility(View.GONE);
+        } else {
+            profileBT.setVisibility(View.GONE);
+            postBT.setVisibility(View.GONE);
+            friendsBT.setVisibility(View.GONE);
+            locationBT.setVisibility(View.GONE);
+            trackBT.setVisibility(View.GONE);
+        }
 
         profileBT.setOnClickListener(new View.OnClickListener() {
             @Override
