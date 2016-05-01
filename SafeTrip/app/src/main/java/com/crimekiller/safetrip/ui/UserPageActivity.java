@@ -2,6 +2,7 @@ package com.crimekiller.safetrip.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -126,6 +127,11 @@ public class UserPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkLocation();
+                new AlertDialog.Builder(UserPageActivity.this)
+                        .setTitle("Alert: ")
+                        .setMessage("You Have shared your location ! ")
+                        .setNegativeButton("OK", null)
+                        .show();
             }
         });
 
@@ -159,7 +165,7 @@ public class UserPageActivity extends AppCompatActivity {
 
             @Override
             public void onLocationChanged(Location location) {
-               // updateShow(location);
+                //updateShow(location);
             }
 
             @Override
