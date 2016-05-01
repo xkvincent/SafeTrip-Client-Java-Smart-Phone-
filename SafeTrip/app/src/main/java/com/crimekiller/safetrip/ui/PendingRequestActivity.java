@@ -25,6 +25,7 @@ public class PendingRequestActivity extends AppCompatActivity {
     private ArrayList<String> PendingRequest;
     private ListView requestListView;
     private String username;
+    private String password;
     private Bundle bundle;
     private static String GET_PENDING_REQUEST_COMMAND = "Get Pending Request";
 
@@ -39,6 +40,7 @@ public class PendingRequestActivity extends AppCompatActivity {
         Intent intent = getIntent();//  get the username from former activity
         bundle = intent.getExtras();
         username = bundle.getString("username");
+        password = bundle.getString("password");
         PendingRequest = new ArrayList<String>();
         connect();
 
@@ -95,6 +97,7 @@ public class PendingRequestActivity extends AppCompatActivity {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("username",username);
+                        bundle.putString("password",password);
                         bundle.putString("requestUsername",name);
 
                         detailedPendingRequestIntent.putExtras(bundle);

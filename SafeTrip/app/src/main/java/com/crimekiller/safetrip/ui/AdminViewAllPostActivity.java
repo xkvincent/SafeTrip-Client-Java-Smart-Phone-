@@ -3,20 +3,16 @@ package com.crimekiller.safetrip.ui;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
-import com.crimekiller.safetrip.model.AllPostAdapter;
+import com.crimekiller.safetrip.model.AdminPostAdapter;
 import com.crimekiller.safetrip.model.Post;
-import com.crimekiller.safetrip.model.SimplePostAdapter;
 
 import java.util.ArrayList;
 
@@ -60,7 +56,7 @@ public class AdminViewAllPostActivity extends AppCompatActivity {
 
             @Override
             protected void onProgressUpdate(ArrayList<Post>... values) {
-                SimplePostAdapter adapter = new SimplePostAdapter(AdminViewAllPostActivity.this, postList);
+                AdminPostAdapter adapter = new AdminPostAdapter(AdminViewAllPostActivity.this, postList);
                 AdminAllPostListView.setAdapter(adapter);
 
                 super.onProgressUpdate(values);

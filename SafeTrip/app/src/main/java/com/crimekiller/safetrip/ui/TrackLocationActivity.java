@@ -41,7 +41,7 @@ public class TrackLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_track_location_activity);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/SwistbInk Duwhoers Brush.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
         TextView tv = (TextView)findViewById(R.id.text);
 
         titleTv = (TextView) findViewById(R.id.titleTv);
