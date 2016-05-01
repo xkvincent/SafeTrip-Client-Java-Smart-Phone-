@@ -2,12 +2,9 @@ package com.crimekiller.safetrip.ui;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,7 +16,6 @@ import android.widget.TextView;
 
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
-import com.crimekiller.safetrip.exception.ExceptionHandler;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 import java.util.ArrayList;
@@ -34,11 +30,14 @@ import java.util.ArrayList;
 public class AdminActivity extends ListActivity {
 
     private SearchView searchUserView;
-   // private ListView userListView;
+    private TextView adminMainTitle;
     private ArrayList<User> userList;
+    private ArrayList<String> userNameList;
     private String username;
     private Bundle bundle;
     private Button viewAllPost;
+    private Button BackUserPageBtn;
+    private User userTmp;
 
     private static String GET_USER_LIST_COMMAND = "Get User List";
 
@@ -50,9 +49,14 @@ public class AdminActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
 
+        Typeface GoodDog = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
+
+        adminMainTitle = (TextView) findViewById(R.id.Admin_Main_Title);
+        adminMainTitle.setTypeface(GoodDog);
+
         username = bundle.getString("username");
         userList = new ArrayList<User>();
-
+        userNameList = new ArrayList<String>();
         connect();
 
         searchUserView = (SearchView) findViewById(R.id.searchUserView);
@@ -60,13 +64,25 @@ public class AdminActivity extends ListActivity {
         searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if( !userList.contains(query) )
+                for (User user : userList) {
+                    String name = user.getName();
+                    userNameList.add(name);
+                    if (query.equals(name))
+                        userTmp = user;
+                }
+
+                if (!userNameList.contains(query))
                     try {
-                        throw new AutoException(AutoException.ErrorInfo.UserNotFound, AdminActivity.this );
+                        throw new AutoException(AutoException.ErrorInfo.UserNotFound, AdminActivity.this);
                     } catch (AutoException e) {
                         //Do nothing, handler has been invoked in the AutoException fix()
                     }
-
+                else {
+                    userList.clear();
+                    userList.add(userTmp);
+                    UserAdapter searchAdapter = new UserAdapter(userList);
+                    setListAdapter(searchAdapter);
+                }
                 searchUserView.setIconified(true);
                 return false;
             }
@@ -86,7 +102,19 @@ public class AdminActivity extends ListActivity {
                 startActivity(i);
             }
         });
+
+        BackUserPageBtn = (Button) findViewById(R.id.BackUserPageBtn);
+        BackUserPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminActivity.this, UserPageActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+
     }
+
 
     public void connect() {
 
@@ -147,42 +175,6 @@ public class AdminActivity extends ListActivity {
         i.putExtra(AdminUserPagerFragment.USER_NAME, user.getName());
         startActivityForResult(i, 0);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_items, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) // switch based on selected MenuItem's ID
-        {
-            case R.id.LogOutItem:
-                // create an Intent to launch the AddEditContact Activity
-                Intent logOut =
-                        new Intent(AdminActivity.this, MainActivity.class);
-
-                startActivity(logOut); // start the Activity
-                return true;
-
-            case R.id.MainPageItem:
-                Intent mainPage=
-                        new Intent(AdminActivity.this, UserPageActivity.class);
-                mainPage.putExtras(bundle);
-
-                startActivity(mainPage); // start the Activity
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        } // end switch
-    }
-
 
 }
 
