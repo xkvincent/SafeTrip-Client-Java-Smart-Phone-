@@ -1,7 +1,6 @@
 package com.crimekiller.safetrip.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,15 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
-import com.crimekiller.safetrip.model.User;
-import com.crimekiller.safetrip.ws.local.NotificationService;
-
-import java.util.ArrayList;
 
 /**
  * Created by xuvincent on 16/4/2.

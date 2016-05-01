@@ -1,6 +1,5 @@
 package com.crimekiller.safetrip.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,16 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
 import com.crimekiller.safetrip.model.User;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 
 

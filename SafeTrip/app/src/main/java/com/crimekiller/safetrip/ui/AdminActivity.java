@@ -4,8 +4,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
-import com.crimekiller.safetrip.exception.ExceptionHandler;
 import com.crimekiller.safetrip.model.User;
 import com.crimekiller.safetrip.R;
 import java.util.ArrayList;
