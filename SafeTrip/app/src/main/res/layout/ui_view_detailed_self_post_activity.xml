@@ -65,10 +65,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_DateLabel"
                         android:text="@string/Detailed_Self_Post_Date"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Date"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
                 <TableRow android:id="@+id/DetailedSelfPost_PlateTableRow"
@@ -77,10 +78,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_PlateLabel"
                         android:text="@string/Detailed_Self_Post_Plate"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Plate"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
                 <TableRow android:id="@+id/DetailedSelfPost_DestinationTableRow"
@@ -89,10 +91,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_DestinationLabel"
                         android:text="@string/Detailed_Self_Post_Destination"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Destination"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
                 <TableRow android:id="@+id/DetailedSelfPost_ModelTableRow"
@@ -101,10 +104,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_ModelLabel"
                         android:text="@string/Detailed_Self_Post_Model"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Model"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
                 <TableRow android:id="@+id/DetailedSelfPost_ColorTableRow"
@@ -113,10 +117,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_ColorLabel"
                         android:text="@string/Detailed_Self_Post_Color"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Color"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
                 <TableRow android:id="@+id/DetailedSelfPost_DepartureTableRow"
@@ -125,10 +130,11 @@
                     <TextView android:id="@+id/DetailedSelfPost_DepartureLabel"
                         android:text="@string/Detailed_Self_Post_Departure"
                         android:textColor="#0d0606"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
                     <TextView android:id="@+id/DetailedSelfPost_Departure"
                         style="@style/DetailedSelfPostTextView"
-                        android:textColor="#d54f4f"></TextView>
+                        android:textColor="#2C3646"></TextView>
                 </TableRow>
 
 
