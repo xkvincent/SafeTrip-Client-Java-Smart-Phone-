@@ -44,41 +44,55 @@
                 android:textSize="40sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/round"
-            android:orientation="horizontal">
+            android:weightSum="1"
+            android:background="#2C3646"
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
+                android:textColor="#CBD1DC"
+                android:text="User"
+                android:layout_weight="0.25"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:textColor="#CBD1DC"
                 android:text="Date"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_weight="0.25"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:textColor="#CBD1DC"
                 android:text="Destination"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_weight="0.5"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
         </LinearLayout>
 
         <ListView
             android:id="@+id/Admin_All_Post_List"
-            android:layout_marginTop="10dp"
-            android:layout_width="350dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center"></ListView>
+            android:layout_gravity="center"
+            android:background="#dad4b9"></ListView>
 
 
     </LinearLayout>

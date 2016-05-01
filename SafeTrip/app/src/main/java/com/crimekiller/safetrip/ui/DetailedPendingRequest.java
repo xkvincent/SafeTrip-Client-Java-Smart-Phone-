@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class DetailedPendingRequest extends AppCompatActivity {
 
     private String username;
+    private String password;
     private String requestUsername;
     private TextView usernameTextView;
     private Button acceptBtn;
@@ -36,6 +37,7 @@ public class DetailedPendingRequest extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         username = bundle.getString("username");
+        password = bundle.getString("password");
         requestUsername = bundle.getString("requestUsername");
 
         usernameTextView = (TextView) findViewById(R.id.usernameTextView );
@@ -47,9 +49,12 @@ public class DetailedPendingRequest extends AppCompatActivity {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connect( ACCEPT_PENDING_REQUEST_COMMAND );
+                connect(ACCEPT_PENDING_REQUEST_COMMAND);
                 Intent intent =new Intent(DetailedPendingRequest.this,ManageFriendActivity.class);
-                intent.putExtra("username",username);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("username", username);
+                bundle1.putString("password", password);
+                intent.putExtras(bundle1);
                 startActivity(intent);
             }
         });
@@ -59,7 +64,10 @@ public class DetailedPendingRequest extends AppCompatActivity {
             public void onClick(View v) {
                 connect(DECLINE_PENDING_REQUEST_COMMAND);
                 Intent intent =new Intent(DetailedPendingRequest.this,ManageFriendActivity.class);
-                intent.putExtra("username",username);
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("username", username);
+                bundle2.putString("password", password);
+                intent.putExtras(bundle2);
                 startActivity(intent);
             }
         });
