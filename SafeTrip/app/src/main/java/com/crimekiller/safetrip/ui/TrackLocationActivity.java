@@ -1,6 +1,7 @@
 package com.crimekiller.safetrip.ui;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 
 public class TrackLocationActivity extends AppCompatActivity {
     private EditText trackFriendName;
+    private TextView titleTv;
+    private TextView ButtonTv;
     private Button trackLocation;
     private String username;
     private String password;
@@ -36,6 +40,12 @@ public class TrackLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_track_location_activity);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/SwistbInk Duwhoers Brush.ttf");
+        TextView tv = (TextView)findViewById(R.id.text);
+
+        titleTv = (TextView) findViewById(R.id.titleTv);
+        titleTv.setTypeface(tf);    //Set Font
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.MyProfile_toolbar);
         setSupportActionBar(toolbar);
@@ -74,7 +84,22 @@ public class TrackLocationActivity extends AppCompatActivity {
             @Override
             protected void onProgressUpdate(ArrayList<String>... values) {
 
-                if( locationList !=null && locationList.size() !=0 ){
+                if( locationList.size() == 0 ){
+                    //Not Friend
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.TrackError, TrackLocationActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+                } else if( locationList.size() == 1){
+                    //No share Location
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.ShareLocationError, TrackLocationActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
+                }
+                else {
                     latitude = locationList.get(0);
                     longtitude = locationList.get(1);
 
@@ -87,14 +112,6 @@ public class TrackLocationActivity extends AppCompatActivity {
                     intent.putExtras(myBundle);
 
                     startActivity(intent);
-                }
-                else{
-                    try {
-                        throw new AutoException(AutoException.ErrorInfo.TrackError, TrackLocationActivity.this );
-                    } catch (AutoException e) {
-                        //Do nothing, handler has been invoked in the AutoException fix()
-                    }
-                    // System.out.println("You can not track person who are not your friend");
                 }
                 super.onProgressUpdate(values);
             }

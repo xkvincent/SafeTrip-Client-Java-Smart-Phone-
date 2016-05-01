@@ -108,4 +108,12 @@ public class ExceptionHandler {
                 .setNegativeButton("OK", null)
                 .show();
     }
+
+    public void fixShareLocationError(Context mContext) {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Track Error: ")
+                .setMessage("Your Friend has not shared any location ! ")
+                .setNegativeButton("OK", null)
+                .show();
+    }
 }
