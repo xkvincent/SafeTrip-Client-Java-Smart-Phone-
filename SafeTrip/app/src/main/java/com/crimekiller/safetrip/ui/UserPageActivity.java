@@ -1,7 +1,6 @@
 package com.crimekiller.safetrip.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,16 +19,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
-import com.crimekiller.safetrip.model.User;
-import com.crimekiller.safetrip.ws.local.NotificationService;
-
-import java.util.ArrayList;
 
 /**
  * Created by xuvincent on 16/4/2.
@@ -44,6 +41,7 @@ public class UserPageActivity extends AppCompatActivity {
     private Button trackBT;
     private TextView userPage_user;
     private TextView Welcome;
+    private ImageView adminImage;
 
     private String username;
     private String password;
@@ -85,6 +83,19 @@ public class UserPageActivity extends AppCompatActivity {
         locationBT = (Button) findViewById(R.id.userPage_location);
 
         trackBT = (Button) findViewById(R.id.userPage_track);
+
+        adminImage = (ImageView) findViewById(R.id.UserPage_AdminImageView);
+
+        if (!username.equals("admin")) {
+            adminBT.setVisibility(View.GONE);
+            adminImage.setVisibility(View.GONE);
+        } else {
+            profileBT.setVisibility(View.GONE);
+            postBT.setVisibility(View.GONE);
+            friendsBT.setVisibility(View.GONE);
+            locationBT.setVisibility(View.GONE);
+            trackBT.setVisibility(View.GONE);
+        }
 
         profileBT.setOnClickListener(new View.OnClickListener() {
             @Override
