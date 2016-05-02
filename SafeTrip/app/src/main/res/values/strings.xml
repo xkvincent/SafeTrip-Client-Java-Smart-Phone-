@@ -6,7 +6,7 @@
     <string name="title_activity_view_self_post">ViewSelfPostActivity</string>
     <string name="title_activity_new_post">NewPostActivity</string>
     <string name="title_activity_view_detailed_self_post">ViewDetailedSelfPostActivity</string>
-    <string name="Administrate_Users">Administrate Users</string>
+    <string name="Administrate_Users">Users</string>
     <string name="Manage_Friends">Manage Friends</string>
     <string name="Pending_Friends_Requests">Pending Friends Requests</string>
     <string name="Basic_Information">Basic Information</string>
@@ -80,7 +80,7 @@
 
     <string name="menuitem_log_out">Log Out</string>
     <string name="menuitem_main_page">User Page</string>
-    <string name="Admin_View_All_Post">View All Post</string>
+    <string name="Admin_View_All_Post">All Post</string>
     <string name="title_activity_admin_view_all_post">AdminViewAllPostActivity</string>
     <string name="All_Post">All Posts</string>
     <string name="ShareLocation">ShareLocation</string>
@@ -90,5 +90,6 @@
     <string name="TrackLocationInfo2">* You ONLY Have Rights To Track Locations Of Your Friends.</string>
     <string name="TrackLocationInfo3">* You ONLY Have Rights To Track Your Friend Who Has
                                         Agreed To Share His/Her Location.</string>
+    <string name="AdminBack">Back</string>
 
 </resources>

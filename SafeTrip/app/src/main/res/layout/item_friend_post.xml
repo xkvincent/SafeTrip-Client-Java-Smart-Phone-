@@ -12,7 +12,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Username"
-                android:id="@+id/ViewAllPost_Username" />
+                android:textStyle="bold|italic"
+                android:id="@+id/ViewAllPost_Username"
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -28,14 +30,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Date"
                 android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_Date"/>
+                android:id="@+id/ViewAllPost_Date"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Plate"
                 android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_LicensePlate"/>
+                android:id="@+id/ViewAllPost_LicensePlate"
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -49,14 +53,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Destination"
                 android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_Destination"/>
+                android:id="@+id/ViewAllPost_Destination"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Model"
                 android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_CarModel"/>
+                android:id="@+id/ViewAllPost_CarModel"
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -70,14 +76,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Color"
                 android:layout_weight="0.4"
-                android:id="@+id/ViewAllPost_CarColor"/>
+                android:id="@+id/ViewAllPost_CarColor"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/View_All_Post_Departure"
                 android:layout_weight="0.6"
-                android:id="@+id/ViewAllPost_Departure"/>
+                android:id="@+id/ViewAllPost_Departure"
+                android:gravity="center" />
 
         </LinearLayout>
 

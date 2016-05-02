@@ -77,7 +77,6 @@ public class MainActivity extends Activity {
                 socketClient.run();
 
                 Boolean result = socketClient.getResult();
-
                 return result;
 
             }
