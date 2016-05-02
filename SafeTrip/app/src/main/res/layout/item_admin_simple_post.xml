@@ -9,18 +9,21 @@
         android:id="@+id/Admin_Simple_Post_User"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"/>
+        android:layout_weight="0.25"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/Admin_Simple_Post_Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"/>
+        android:layout_weight="0.25"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/Admin_Simple_Post_Destination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"/>
+        android:layout_weight="0.5"
+        android:textStyle="bold"/>
 
 </LinearLayout>
