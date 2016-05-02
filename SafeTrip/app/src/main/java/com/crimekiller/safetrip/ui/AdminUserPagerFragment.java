@@ -27,15 +27,6 @@ public class AdminUserPagerFragment extends Fragment {
     private TextView titleTextView;
     private Button AdminBackBtn;
 
-//    public static AdminUserPagerFragment newInstance(String name ) {
-//        Bundle args = new Bundle();
-//        args.putSerializable( USER_NAME, name );
-//
-//        AdminUserPagerFragment fragment = new AdminUserPagerFragment();
-//        fragment.setArguments(args);
-//
-//        return fragment;
-//    }
     public static AdminUserPagerFragment newInstance(User user ) {
         Bundle args = new Bundle();
         args.putSerializable(USER, user);

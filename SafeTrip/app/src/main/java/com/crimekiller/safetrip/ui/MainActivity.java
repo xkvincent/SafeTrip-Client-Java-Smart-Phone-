@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_main_activity);
+
         Typeface GoodDog = Typeface.createFromAsset(getAssets(), "fonts/brushstr.ttf");
 
         editText1 = (EditText) findViewById(R.id.logIn_text1);

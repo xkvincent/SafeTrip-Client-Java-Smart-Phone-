@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
+import com.crimekiller.safetrip.ws.local.NotificationService;
 
 /**
  * Created by xuvincent on 16/4/2.
