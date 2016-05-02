@@ -153,8 +153,6 @@ public class DefaultSocketClient extends Thread
                 objOutputStream.writeObject(requestname);
                 objOutputStream.flush();
 
-                locationList = (ArrayList<String>) objInputStream.readObject();
-
             }else if (command.equals(TRACK_FRIEND_LIST_COMMAND)){
 
                 objOutputStream.writeObject(username);

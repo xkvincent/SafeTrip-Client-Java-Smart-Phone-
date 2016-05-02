@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -29,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="80dp">
             <TextView
                 android:id="@+id/Welcome"
@@ -39,8 +38,8 @@
                 android:layout_weight="1"
                 android:textSize="40dp"
                 android:textColor="#2C3646"
-                android:gravity="right"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/userPage_user"
                 android:layout_width="match_parent"
@@ -62,14 +61,13 @@
             android:layout_marginRight="20dp"
             android:orientation="vertical">
 
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/UserPage_AdminImageView"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/social1"
-                android:layout_marginTop="80dp"/>
+                android:layout_marginTop="10dp"/>
 
             <Button
                 android:id="@+id/userPage_myProfile"
