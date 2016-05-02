@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,15 +47,7 @@ public class MainActivity extends Activity {
                 password = editText2.getText().toString();
 
                 connect();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("username", username);
-//                bundle.putString("password", password);
-//                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-                   /* Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);*/
-//                intent.putExtras(bundle);
-//                startActivity(intent);
+
             }
         });
 
@@ -101,7 +92,6 @@ public class MainActivity extends Activity {
 
                     Intent notificationService = new Intent(MainActivity.this,
                             NotificationService.class);
-                    //notificationService.putExtra("username", username);
 
                     notificationService.putExtras(bundle);
                     startService(notificationService);

@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,6 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     private Button finishBt;
     private String username;
-    private Boolean result;
     private EditText editText1;
     private EditText editText2;
     private EditText editText3;
@@ -39,7 +37,6 @@ public class EditPasswordActivity extends AppCompatActivity {
     private Bundle bundle;
 
     private static String EDIT_PASSWORD_COMMAND = "EditPassword";
-    //private String command = "EditPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +50,6 @@ public class EditPasswordActivity extends AppCompatActivity {
         bundle = intent.getExtras();
         username = bundle.getString("username");
         password = bundle.getString("password");
-
-        Log.d("EditActivity", username);
-        Log.d("EditActivity", password);
 
         editText1 = (EditText)findViewById(R.id.editPassword_old);
         editText2 = (EditText)findViewById(R.id.editPassword_password);
@@ -71,9 +65,6 @@ public class EditPasswordActivity extends AppCompatActivity {
                 newPassword = editText2.getText().toString();
                 newPassword2 = editText3.getText().toString();
 
-                Log.d("oldPassword",oldPassword);
-                Log.d("newPass",newPassword);
-
                 //if twice new password not same
                 if(!newPassword.equals(newPassword2)){
                     try {
@@ -82,15 +73,12 @@ public class EditPasswordActivity extends AppCompatActivity {
                     } catch (AutoException e) {
                         //Do nothing, handler has been invoked in the AutoException fix()
                     }
-//                    Toast.makeText(EditPasswordActivity.this, "New password are not same! ",
-//                            Toast.LENGTH_SHORT).show();
                 }
                 else {
 
                     if (password.equals(oldPassword)) {
                         connect();
 
-                        Log.d("Edit", "in succ");
                         Intent intent2 = new Intent(EditPasswordActivity.this,
                                 MyProfileActivity.class);
                         intent2.putExtras(bundle);
@@ -110,8 +98,7 @@ public class EditPasswordActivity extends AppCompatActivity {
                         } catch (AutoException e) {
                             //Do nothing, handler has been invoked in the AutoException fix()
                         }
-//                        Toast.makeText(EditPasswordActivity.this, "Input Wrong Old Password!",
-//                                Toast.LENGTH_SHORT).show();
+
                     }
 
                 }

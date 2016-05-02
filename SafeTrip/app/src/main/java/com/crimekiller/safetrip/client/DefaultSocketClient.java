@@ -3,7 +3,6 @@
  */
 package com.crimekiller.safetrip.client;
 
-import android.util.Log;
 
 
 import java.io.IOException;
@@ -207,7 +206,6 @@ public class DefaultSocketClient extends Thread
 				objOutputStream.writeObject(username);
 				objOutputStream.flush();
 				result = (Boolean)objInputStream.readObject();
-				Log.d("get result", result.toString());
 				if(result) {//success
 					User user = new User();
 					user.setName(username);

@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crimekiller.safetrip.R;
@@ -22,10 +22,11 @@ public class MyProfileActivity extends AppCompatActivity {
     private TextView textView;
     private String username;
     private Bundle bundle;
-    private Button editPicture;
+    private Button editPictureBt;
+    private ImageView image;
+    private static int flage = 0;
 
     private static String MY_PROFILE_COMMAND = "MyProfile";
-    //private String command = "MyProfile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,18 @@ public class MyProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         bundle = intent.getExtras();
         username = bundle.getString("username");
-//        username = intent.getStringExtra("username");
-        Log.d("MyprofileActivity", username);
 
         textView = (TextView)findViewById(R.id.myProfile_textView6);
         textView.setText("Username: "+username);
+
+        image = (ImageView) findViewById(R.id.myProfile_imageView);
+
+        if(flage == 0) {
+            image.setImageResource(R.drawable.head);
+
+        }else {
+            image.setImageResource(R.drawable.head2);
+        }
 
         editPasswordBt = (Button)findViewById(R.id.myProfile_edit);
 
@@ -54,6 +62,23 @@ public class MyProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        editPictureBt = (Button)findViewById(R.id.myProfile_upload);
+        editPictureBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flage == 0) {
+                    image.setImageResource(R.drawable.head2);
+                    flage = 1;
+                }
+                else{
+                    image.setImageResource(R.drawable.head);
+                    flage = 0;
+                }
+
+            }
+        });
+
 
     }
 
