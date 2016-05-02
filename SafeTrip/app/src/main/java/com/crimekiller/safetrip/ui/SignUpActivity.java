@@ -98,8 +98,15 @@ public class SignUpActivity extends AppCompatActivity {
 //                    Toast.makeText(SignUpActivity.this, "Invalid Email Format! ",
 //                            Toast.LENGTH_SHORT).show();
                 }
-                else {
+                else if( username.length() == 0  ){
+                    try {
+                        throw new AutoException(AutoException.ErrorInfo.InValidUserName,
+                                SignUpActivity.this );
+                    } catch (AutoException e) {
+                        //Do nothing, handler has been invoked in the AutoException fix()
+                    }
 
+                } else {
                     connect();
                 }
             }

@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
+            <custom_font.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -38,6 +38,7 @@
                 android:textColor="#2C3646"
                 android:textStyle="bold"
                 android:gravity="right"
+                android:textSize="25dp"
                 style="@style/TitleTextView"/>
             <TextView
                 android:id="@+id/username"
@@ -50,10 +51,11 @@
                 android:gravity="left"
                 style="@style/TitleTextView"/>
         </LinearLayout>
-        <TextView
+        <custom_font.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Manage_Friends"
+            android:textSize="30dp"
             android:layout_gravity="center"
             android:textColor="#2C3646"
             android:textStyle="bold"

@@ -32,7 +32,7 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
-        <TextView
+        <custom_font.MyTextView
             android:id="@+id/titleTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <custom_font.MyTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/TrackLocationInfo1"
@@ -58,7 +58,7 @@
                 android:textSize="12dp"
                 android:gravity="left"/>
 
-            <custom_font.MyTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/TrackLocationInfo2"
@@ -68,7 +68,7 @@
                 android:textSize="12dp"
                 android:gravity="left"/>
 
-            <custom_font.MyTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/TrackLocationInfo3"

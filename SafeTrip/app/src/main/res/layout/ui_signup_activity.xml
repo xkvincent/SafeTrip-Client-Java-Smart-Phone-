@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -21,10 +20,8 @@
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +40,6 @@
                 android:textColor="#2C3646"
                 android:gravity="center"
                 android:textStyle="bold"
-
                 />
 
 
@@ -54,7 +50,7 @@
                 android:hint="USERNAME"
                 android:inputType="text"
                 android:textColorHint="#a9b0c3"
-                android:textSize="13dp"
+                android:textSize="20dp"
                 android:background="#00000000"
                 android:layout_marginTop="42dp"
 
@@ -76,8 +72,8 @@
                 android:hint="EMAIL ADDRESS"
                 android:inputType="text"
                 android:textColorHint="#a9b0c3"
-                android:layout_marginTop="32dp"
-                android:textSize="13dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp"
                 android:background="#00000000"
 
                 />
@@ -97,8 +93,8 @@
                 android:hint="PASSWORD"
                 android:inputType="textPassword"
                 android:textColorHint="#a9b0c3"
-                android:layout_marginTop="32dp"
-                android:textSize="13dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp"
                 android:background="#00000000"
 
                 />
@@ -118,8 +114,8 @@
                 android:hint="REPEAT PASSWORD"
                 android:inputType="textPassword"
                 android:textColorHint="#a9b0c3"
-                android:layout_marginTop="32dp"
-                android:textSize="13dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp"
                 android:background="#00000000"
                 />
 

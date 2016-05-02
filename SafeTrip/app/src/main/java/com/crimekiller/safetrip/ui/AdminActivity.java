@@ -48,10 +48,8 @@ public class AdminActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_admin_activity);
 
-        Typeface GoodDog = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
 
         adminMainTitle = (TextView) findViewById(R.id.Admin_Main_Title);
-        adminMainTitle.setTypeface(GoodDog);
 
         username = bundle.getString("username");
         userList = new ArrayList<User>();
@@ -134,7 +132,6 @@ public class AdminActivity extends ListActivity {
 
                 UserAdapter adapter = new UserAdapter(userList);
                 setListAdapter(adapter);
-                System.out.println("On Progress Update");
                 super.onProgressUpdate(values);
             }
         };

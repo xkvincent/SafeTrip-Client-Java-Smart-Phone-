@@ -27,7 +27,7 @@ public class MyTextView extends TextView{
 
     private void init() {
         if (!isInEditMode()) {
-            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Lato-Regular.ttf");
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/brushstr.ttf");
             setTypeface(tf);
         }
     }

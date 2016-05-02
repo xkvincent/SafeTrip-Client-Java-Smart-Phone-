@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <custom_font.MyTextView
             android:id="@+id/myProfile_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,9 +34,7 @@
             android:text="@string/MyProfile"
             android:textColor="#2C3646"
             android:gravity="center"
-            android:textStyle="bold"
-
-            />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:orientation="horizontal"

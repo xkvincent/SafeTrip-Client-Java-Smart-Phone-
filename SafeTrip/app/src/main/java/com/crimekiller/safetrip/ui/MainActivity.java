@@ -1,13 +1,16 @@
 package com.crimekiller.safetrip.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
@@ -25,6 +28,7 @@ public class MainActivity extends Activity {
     private EditText editText2;
     private String username;
     private String password;
+    private TextView loginTitle;
 
     private static String LOG_IN_COMMAND = "Login";
 
@@ -32,9 +36,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_main_activity);
+        Typeface GoodDog = Typeface.createFromAsset(getAssets(), "fonts/brushstr.ttf");
 
         editText1 = (EditText) findViewById(R.id.logIn_text1);
         editText2 = (EditText)findViewById(R.id.logIn_text2);
+        loginTitle = (TextView) findViewById(R.id.logIn_title);
+        loginTitle.setTypeface(GoodDog);
 
         loginButton = (Button) findViewById(R.id.logIn_login);
         signupButton = (Button) findViewById(R.id.logIn_signUp);
@@ -42,21 +49,10 @@ public class MainActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 username = editText1.getText().toString();
                 password = editText2.getText().toString();
 
                 connect();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("username", username);
-//                bundle.putString("password", password);
-//                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
-                   /* Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);*/
-//                intent.putExtras(bundle);
-//                startActivity(intent);
             }
         });
 

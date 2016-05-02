@@ -79,7 +79,7 @@ public class ExceptionHandler {
     }
 
     public void fixFailCreateUser(Context mContext){//signUp
-        Toast.makeText(mContext, "Fail to Create User!",
+        Toast.makeText(mContext, "The Name Has Been Registered Before!",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -115,5 +115,10 @@ public class ExceptionHandler {
                 .setMessage("Your Friend has not shared any location ! ")
                 .setNegativeButton("OK", null)
                 .show();
+    }
+
+    public void fixInValidUserName(Context mContext) {
+        Toast.makeText(mContext, "User Name Cannot Be Empty!",
+                Toast.LENGTH_SHORT).show();
     }
 }

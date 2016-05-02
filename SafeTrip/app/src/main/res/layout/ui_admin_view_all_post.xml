@@ -32,7 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp">
 
-            <TextView
+            <custom_font.MyTextView
                 android:layout_width="260dp"
                 android:layout_height="45dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"

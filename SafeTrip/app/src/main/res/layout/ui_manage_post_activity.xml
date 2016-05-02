@@ -33,9 +33,9 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <custom_font.MyTextView
             android:layout_width="260dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Manage_Post_Label"
             android:id="@+id/ManagePost_ManagePost"

@@ -71,11 +71,11 @@
     <string name="View_All_Post_Departure"> Departure Place</string>
     <string name="Hello">Hello !</string>
     <string name="title_activity_detailed_pending_request">DetailedPendingRequest</string>
-    <string name="Invitation_Information">Detailed Invitation Information</string>
+    <string name="Invitation_Information">Invitation Information</string>
     <string name="Accept">Accept</string>
     <string name="Decline">Decline</string>
     <string name="Email">Email</string>
-    <string name="Add_New_Friend">Add New Friend</string>
+    <string name="Add_New_Friend">Search New Friend</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="menuitem_log_out">Log Out</string>

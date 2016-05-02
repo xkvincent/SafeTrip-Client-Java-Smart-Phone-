@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="80dp">
-            <TextView
+            <custom_font.MyTextView
                 android:id="@+id/Welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textColor="#2C3646"
                 android:gravity="center"
                 android:textStyle="bold"/>
-            <TextView
+            <custom_font.MyTextView
                 android:id="@+id/userPage_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

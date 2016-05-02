@@ -48,6 +48,7 @@ public class UserPageActivity extends AppCompatActivity {
     private Bundle bundle;
     private LocationManager lm;
     private Location lc;
+    private Location updatelc;
 
     private static String  SHARE_LOCATION = "Share my location";
 
@@ -55,7 +56,6 @@ public class UserPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_userpage_activity);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.Userpage_toolbar);
         setSupportActionBar(toolbar);
@@ -67,21 +67,16 @@ public class UserPageActivity extends AppCompatActivity {
 
         userPage_user = (TextView) findViewById(R.id.userPage_user);
         userPage_user.setText(username);
-        userPage_user.setTypeface(tf);
+        //userPage_user.setTypeface(tf);
 
         Welcome = (TextView) findViewById(R.id.Welcome);
-        Welcome.setTypeface(tf);
+        //Welcome.setTypeface(tf);
 
         profileBT = (Button)findViewById(R.id.userPage_myProfile);
-
         postBT = (Button)findViewById(R.id.userPage_post);
-
         friendsBT = (Button)findViewById(R.id.userPage_friends);
-
         adminBT = (Button) findViewById(R.id.userPage_admin);
-
         locationBT = (Button) findViewById(R.id.userPage_location);
-
         trackBT = (Button) findViewById(R.id.userPage_track);
 
         adminImage = (ImageView) findViewById(R.id.UserPage_AdminImageView);
@@ -153,11 +148,6 @@ public class UserPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkLocation();
-                new AlertDialog.Builder(UserPageActivity.this)
-                        .setTitle("Alert: ")
-                        .setMessage("You Have shared your location ! ")
-                        .setNegativeButton("OK", null)
-                        .show();
             }
         });
 
@@ -185,7 +175,20 @@ public class UserPageActivity extends AppCompatActivity {
         }
 
         lc = lm.getLastKnownLocation(lm.GPS_PROVIDER);
-        updateShow(lc);
+        if( lc != null ){
+            updateShow(lc);
+            new AlertDialog.Builder(UserPageActivity.this)
+                    .setTitle("Alert: ")
+                    .setMessage("You Have shared your location ! ")
+                    .setNegativeButton("OK", null)
+                    .show();
+        }
+        else
+            new AlertDialog.Builder(UserPageActivity.this)
+                    .setTitle("Alert: ")
+                    .setMessage("Service Error, Check Whether Your GPS Is On ! ")
+                    .setNegativeButton("OK", null)
+                    .show();
 
         lm.requestLocationUpdates(lm.GPS_PROVIDER, 0, 0, new LocationListener() {
 
@@ -208,7 +211,21 @@ public class UserPageActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions( UserPageActivity.this,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
-                updateShow(lm.getLastKnownLocation(provider));
+                updatelc = lm.getLastKnownLocation(provider);
+
+                if( lc != null ){
+                    updateShow(updatelc);
+                    new AlertDialog.Builder(UserPageActivity.this)
+                            .setTitle("Alert: ")
+                            .setMessage("You Have shared your location ! ")
+                            .setNegativeButton("OK", null)
+                            .show();
+                } else
+                    new AlertDialog.Builder(UserPageActivity.this)
+                            .setTitle("Alert: ")
+                            .setMessage("Service Error, Check Whether Your GPS Is On ! ")
+                            .setNegativeButton("OK", null)
+                            .show();
             }
 
             @Override

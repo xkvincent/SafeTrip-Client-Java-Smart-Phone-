@@ -10,7 +10,7 @@
         android:id="@+id/logIn_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
+        android:textSize="50dp"
         android:text="@string/SafeTrip"
         android:textColor="#2C3646"
         android:gravity="center"
@@ -41,14 +41,14 @@
         android:orientation="vertical">
 
 
-        <EditText
+        <custom_font.MyEditText
             android:id="@+id/logIn_text1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="USERNAME"
             android:inputType="text"
             android:textColorHint="#a9b0c3"
-            android:textSize="13dp"
+            android:textSize="20dp"
             android:background="#00000000"
             android:paddingLeft="8dp"
             />
@@ -70,10 +70,9 @@
             android:inputType="textPassword"
             android:textColorHint="#a9b0c3"
             android:layout_marginTop="50dp"
-            android:textSize="13dp"
+            android:textSize="20dp"
             android:background="#00000000"
-            android:paddingLeft="8dp"
-            />
+            android:paddingLeft="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

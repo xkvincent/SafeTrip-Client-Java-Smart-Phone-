@@ -41,11 +41,10 @@ public class TrackLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_track_location_activity);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/GoodDog.otf");
         TextView tv = (TextView)findViewById(R.id.text);
 
         titleTv = (TextView) findViewById(R.id.titleTv);
-        titleTv.setTypeface(tf);    //Set Font
+        //titleTv.setTypeface(tf);    //Set Font
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.MyProfile_toolbar);
         setSupportActionBar(toolbar);

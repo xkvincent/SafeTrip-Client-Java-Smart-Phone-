@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/fab_margin">
 
-    <TextView
+    <custom_font.MyTextView
         android:id="@+id/Admin_User_Basic_Info_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,18 +28,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <custom_font.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Username"
             android:layout_weight="1"
+            android:textSize="20dp"
             style="@style/LabelTextView"/>
 
-        <TextView
+        <custom_font.MyTextView
             android:id="@+id/usernameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="20dp"
             style="@style/LabelTextView"/>
     </LinearLayout>
 
@@ -72,7 +74,7 @@
         android:background="@drawable/circle"
         android:textColor="#2C3646"
         android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
