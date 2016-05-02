@@ -49,7 +49,7 @@
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:id="@+id/myProfile_imageView"
-                android:src="@drawable/social1" />
+                 />
 
             <LinearLayout
                 android:orientation="vertical"

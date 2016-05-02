@@ -1,26 +1,20 @@
 package com.crimekiller.safetrip.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.crimekiller.safetrip.R;
 import com.crimekiller.safetrip.client.DefaultSocketClient;
 import com.crimekiller.safetrip.exception.AutoException;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 /**
  * Created by xuvincent on 16/4/2.
@@ -38,7 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     private String password;
     private String password2;
 
-//    private String command = "SignUp";
     private static String SIGN_UP_COMMAND = "SignUp";
 
     @Override
@@ -65,11 +58,6 @@ public class SignUpActivity extends AppCompatActivity {
                 password = editText3.getText().toString();
                 password2 = editText4.getText().toString();
 
-                Log.d("SignUP username", username);
-                Log.d("SignUP email",email);
-                Log.d("SignUP password1",password);
-                Log.d("SignUP password2",password2);
-
                 //when twice password not same
                 if(!password.equals(password2)){
                     try {
@@ -78,8 +66,6 @@ public class SignUpActivity extends AppCompatActivity {
                     } catch (AutoException e) {
                         //Do nothing, handler has been invoked in the AutoException fix()
                     }
-//                    Toast.makeText(SignUpActivity.this, "Input Different Password! ",
-//                            Toast.LENGTH_SHORT).show();
                 }else if(password.length()>12||password.length()<6){
                     try {
                         throw new AutoException(AutoException.ErrorInfo.InValidPassword,
@@ -95,8 +81,6 @@ public class SignUpActivity extends AppCompatActivity {
                     } catch (AutoException e) {
                         //Do nothing, handler has been invoked in the AutoException fix()
                     }
-//                    Toast.makeText(SignUpActivity.this, "Invalid Email Format! ",
-//                            Toast.LENGTH_SHORT).show();
                 }
                 else if( username.length() == 0  ){
                     try {
@@ -127,7 +111,6 @@ public class SignUpActivity extends AppCompatActivity {
                 socketClient.run();
 
                 Boolean result = socketClient.getResult();
-                Log.d("ceshi",result.toString());
 
                 return result;
 
@@ -135,9 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Boolean result) {
-                Log.d("onpost","jinru");
                 if(result){
-                    Log.d("result = ",result.toString());
                     Intent intent = new Intent(SignUpActivity.this, UserPageActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("username", username);
@@ -145,22 +126,18 @@ public class SignUpActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }else{
-                    Log.d("result=",result.toString());
                     try {
                         throw new AutoException(AutoException.ErrorInfo.FailCreateUser
                                 , SignUpActivity.this );
                     } catch (AutoException e) {
                         //Do nothing, handler has been invoked in the AutoException fix()
                     }
-//                    Toast.makeText(SignUpActivity.this, "Fail to Create User!",
-//                            Toast.LENGTH_SHORT).show();
 
                 }
             }
 
         };
         read.execute();
-        Log.d("defalut","false");
 
     }
 
